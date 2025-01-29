@@ -39,6 +39,14 @@
     nodePackages.tailwindcss
     prettierd
     nodejs_23
+    qbittorrent
+    go
+    gccgo14
+    gtk3
+    webkitgtk
+    nsis
+    upx
+    hypridle
   ];
 
   home.sessionVariables = {
@@ -48,9 +56,21 @@
 
   # Let Home Manager install and manage itself.
   programs = {
+    hypridle = {
+      enable = true;
+
+      listener = [
+        {
+          timeout = 300;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+      ];
+    };
     home-manager.enable = true;
     zsh = {
       enable = true;
+      prezto.editor.keymap = "vi";
       autosuggestion = {
         enable = true;
       };
@@ -59,6 +79,9 @@
       };
       initExtra = ''
         export PATH="/home/fabric/.deno/bin:$PATH"
+        export PATH=$PATH:(go env GOPATH)/bin
+
+        alias wails='$(go env GOPATH)/bin/wails'
       '';
     };
     oh-my-posh = {
@@ -81,6 +104,7 @@
             highlight.timer = 150;
           };
         };
+        ts-comments.enable = true;
         telescope = {
           enable = true;
           keymaps = {
@@ -160,13 +184,13 @@
         harpoon = {
           enable = true;
           keymaps = {
-            addFile = "<leader>a";
+            addFile = "<leader>ha";
             toggleQuickMenu = "<C-e>";
             navFile = {
-              "1" = "<leader>6";
-              "2" = "<leader>7";
-              "3" = "<leader>8";
-              "4" = "<leader>9";
+              "1" = "<leader>h;";
+              "2" = "<leader>h,";
+              "3" = "<leader>h.";
+              "4" = "<leader>hp";
             };
           };
         };
@@ -182,22 +206,22 @@
             signcolumn = true;
             signs = {
               add = {
-                text = "▎";
+                text = "+";
               };
               change = {
                 text = "▎";
               };
               changedelete = {
-                text = "▎";
+                text = "-";
               };
               delete = {
-                text = "";
+                text = "-";
               };
               topdelete = {
-                text = "";
+                text = "-";
               };
               untracked = {
-                text = "▎";
+                text = "!";
               };
             };
             watch_gitdir = {
@@ -277,9 +301,33 @@
           enable = true;
           modules = {
             pairs.enable = true;
-            surround.enable = true;
+            starter = {
+              enable = true;
+              header = ''
+                ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗
+                ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║
+                ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║
+                ██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║
+                ██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║
+              '';
+            };
+            surround = {
+              enable = true;
+              mappings = {
+                add = "gsa";
+                delete = "gsd";
+                find = "gsf";
+                find_left = "gsF";
+                highlight = "gsh";
+                replace = "gsr";
+                update_n_lines = "gsn";
+              };
+            };
           };
         };
+        todo-comments.enable = true;
+        persistence.enable = true;
+        friendly-snippets.enable = true;
         lsp = {
           enable = true;
           servers = {
@@ -287,6 +335,13 @@
             eslint.enable = true;
             nil_ls.enable = true;
             tailwindcss.enable = true;
+            gopls.enable = true;
+            rust_analyzer = {
+              enable = true;
+              installCargo = true;
+              installRustc = true;
+              installRustfmt = true;
+            };
           };
         };
         cmp = {
@@ -297,13 +352,14 @@
               {name = "nvim_lsp";}
               {name = "path";}
               {name = "buffer";}
+              {name = "luasnip";}
             ];
             mapping = {
               __raw = ''
                 cmp.mapping.preset.insert({
                   ["<C-j>"] = cmp.mapping.select_next_item(),
                   ["<C-k>"] = cmp.mapping.select_prev_item(),
-                  ["<Tab>"] = cmp.mapping.confirm(),
+                  ["<Tab>","<Enter>"] = cmp.mapping.confirm(),
                 })
               '';
             };
@@ -331,6 +387,7 @@
         termguicolors = true;
         signcolumn = "yes";
         scrolloff = 12;
+        shada = "'1000,f1,<500,%";
       };
       keymaps = [
         {
@@ -616,10 +673,19 @@
       "$fileManager " = "dolphin";
       "$menu" = "wofi --show drun";
 
+      input = {
+        "repeat_delay" = "300";
+        "repeate_rate" = "50";
+      };
+
+      exec-once = [
+        "hypridle"
+      ];
+
       windowrule = [
         "workspace 6 silent,^(discord)$"
-        "workspace 7 silent,^(kitty)$"
-        "workspace 8 silent,^(firefox)$"
+        "workspace 4 silent,^(kitty)$"
+        "workspace 5 silent,^(firefox)$"
       ];
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
@@ -667,6 +733,10 @@
       #   "DP-1, 1920x1080@144, 1"
       # ];
     };
+  };
+
+  services = {
+    hypridle.enable = true;
   };
   home.sessionVariables.NIXOS_OZONE_WL = "1";
 
