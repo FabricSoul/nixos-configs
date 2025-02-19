@@ -4,12 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    
+
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     hyprpanel = {
       url = "github:jas-singhfsu/hyprpanel";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,31 +23,43 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixvim, hyprpanel,...}: 
-    let
-      lib = nixpkgs.lib;
-      pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      pkgsUnstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
-    in {
-      nixosConfigurations = {
-        Tatara = lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ 
-            ./configuration.nix
-          ];
-        };
-      };
-
-      homeConfigurations.fabric = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit nixvim hyprpanel;
-        };
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
+    nixvim,
+    hyprpanel,
+    ...
+  }: let
+    lib = nixpkgs.lib;
+    pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    pkgsUnstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
+  in {
+    nixosConfigurations = {
+      Tatara = lib.nixosSystem {
+        system = "x86_64-linux";
         modules = [
-	  ./home.nix
-	 nixvim.homeManagerModules.nixvim
-	 hyprpanel.homeManagerModules.hyprpanel
-	];
-     };
-   };
-}	
+          ./configuration.nix
+        ];
+      };
+    };
+
+    homeConfigurations.fabric = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = {
+        inherit nixvim hyprpanel;
+      };
+      modules = [
+        {
+          nixpkgs.overlays = [
+            hyprpanel.overlay
+          ];
+        }
+        ./home.nix
+        nixvim.homeManagerModules.nixvim
+        hyprpanel.homeManagerModules.hyprpanel
+      ];
+    };
+  };
+}

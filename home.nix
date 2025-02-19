@@ -42,11 +42,12 @@
     qbittorrent
     go
     gccgo14
-    gtk3
-    webkitgtk
-    nsis
-    upx
     hypridle
+    dprint
+    code-cursor
+    delve
+    ldtk
+    libresprite
   ];
 
   home.sessionVariables = {
@@ -56,26 +57,28 @@
 
   # Let Home Manager install and manage itself.
   programs = {
-    hypridle = {
-      enable = true;
-
-      listener = [
-        {
-          timeout = 300;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        }
-      ];
-    };
+    # hypridle = {
+    #   enable = true;
+    #
+    #   listener = [
+    #     {
+    #       timeout = 300;
+    #       on-timeout = "hyprctl dispatch dpms off";
+    #       on-resume = "hyprctl dispatch dpms on";
+    #     }
+    #   ];
+    # };
     home-manager.enable = true;
     zsh = {
       enable = true;
-      prezto.editor.keymap = "vi";
       autosuggestion = {
         enable = true;
       };
       oh-my-zsh = {
         enable = true;
+        plugins = [
+          "vi-mode"
+        ];
       };
       initExtra = ''
         export PATH="/home/fabric/.deno/bin:$PATH"
@@ -93,6 +96,11 @@
     nixvim = {
       enable = true;
       plugins = {
+        cmp-dictionary.enable = true;
+        cmp-spell.enable = true;
+        toggleterm = {
+          enable = true;
+        };
         web-devicons.enable = true;
         nix.enable = true;
         bufferline.enable = true;
@@ -234,6 +242,7 @@
           settings = {
             formatters_by_ft = {
               nix = ["alejandra"];
+              markdown = ["dprint"];
               # Use prettierd first, fallback to prettier
               javascript = {
                 __unkeyed-1 = "prettierd";
@@ -259,7 +268,6 @@
               scss = ["prettier"];
               html = ["prettier"];
               json = ["prettier"];
-              markdown = ["prettier"];
               # Run on all files
               "_" = ["trim_whitespace" "trim_newlines"];
             };
@@ -330,6 +338,7 @@
         friendly-snippets.enable = true;
         lsp = {
           enable = true;
+          inlayHints = true;
           servers = {
             ts_ls.enable = true;
             eslint.enable = true;
@@ -353,13 +362,15 @@
               {name = "path";}
               {name = "buffer";}
               {name = "luasnip";}
+              {name = "dictionary";}
             ];
             mapping = {
               __raw = ''
                 cmp.mapping.preset.insert({
                   ["<C-j>"] = cmp.mapping.select_next_item(),
                   ["<C-k>"] = cmp.mapping.select_prev_item(),
-                  ["<Tab>","<Enter>"] = cmp.mapping.confirm(),
+                  ["<Tab>"] = cmp.mapping.confirm(),
+                  ["<Enter>"] = cmp.mapping.confirm(),
                 })
               '';
             };
@@ -388,6 +399,8 @@
         signcolumn = "yes";
         scrolloff = 12;
         shada = "'1000,f1,<500,%";
+        guicursor = "";
+        colorcolumn = "80";
       };
       keymaps = [
         {
@@ -497,6 +510,13 @@
           key = "<leader>p";
           action = "\"_dP";
         }
+
+        # Toggleterm
+        {
+          mode = "n";
+          key = "<leader>t";
+          action = ":ToggleTerm direction=float<CR>";
+        }
       ];
       colorschemes.rose-pine.enable = true;
     };
@@ -540,7 +560,6 @@
       # Useful when updating your config so that you
       # don't need to manually restart it.
       # Default: false
-      systemd.enable = true;
 
       # Add '/nix/store/.../hyprpanel' to the
       # 'exec-once' in your Hyprland config.
@@ -674,12 +693,12 @@
       "$menu" = "wofi --show drun";
 
       input = {
-        "repeat_delay" = "300";
-        "repeate_rate" = "50";
+        "repeat_delay" = 300;
+        "repeat_rate" = 50;
       };
 
       exec-once = [
-        "hypridle"
+        # "hypridle"
       ];
 
       windowrule = [
@@ -736,7 +755,7 @@
   };
 
   services = {
-    hypridle.enable = true;
+    # hypridle.enable = true;
   };
   home.sessionVariables.NIXOS_OZONE_WL = "1";
 

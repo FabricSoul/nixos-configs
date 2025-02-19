@@ -62,6 +62,7 @@
     libnotify
     kitty
     zsh
+    ollama
   ];
 
   fonts.packages = with pkgs; [nerdfonts];
@@ -77,6 +78,12 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
+  services = {
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
+  };
   services.openssh.enable = true;
   services.greetd = {
     enable = true;
