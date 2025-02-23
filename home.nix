@@ -692,6 +692,11 @@
       "$fileManager " = "dolphin";
       "$menu" = "wofi --show drun";
 
+      general = {
+        gaps_in = 0;
+        gaps_out = "0, 600, 0, 600";
+      };
+
       input = {
         "repeat_delay" = 300;
         "repeat_rate" = 50;
@@ -749,7 +754,7 @@
         "$mainMod SHIFT, 0, movetoworkspace, 10"
       ];
       # monitor = [
-      #   "DP-1, 1920x1080@144, 1"
+      #   "DP-3,preferred,auto,1,workspace=1,addreserved,200,200,0,0"
       # ];
     };
   };
