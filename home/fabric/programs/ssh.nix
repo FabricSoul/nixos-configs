@@ -7,7 +7,7 @@
   programs = {
     ssh = {
       enable = true;
-      startAgent = true;
     };
   };
+  services.ssh-agent.enable = true;
 }

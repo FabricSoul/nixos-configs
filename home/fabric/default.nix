@@ -13,10 +13,11 @@
     ./programs/nixvim.nix
     ./programs/tmux.nix
     ./programs/zsh.nix
+    ./programs/ssh.nix
 
     # Import desktop configurations
     ./desktop/hyprland.nix
-    # ./desktop/hyprpanel.nix
+    ./desktop/hyprpanel.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage
