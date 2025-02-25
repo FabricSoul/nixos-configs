@@ -2,17 +2,17 @@
 {
   config,
   pkgs,
-  lib,
+  hyprpanel,
   ...
 }: {
+  # Wayland settings for hyprpanel
   wayland.windowManager.hyprland.settings = {
     exec-once = [
       "${pkgs.hyprpanel}/bin/hyprpanel"
     ];
   };
 
-  # Changed from 'programs.hyprpanel' to just 'hyprpanel'
-  hyprpanel = {
+  programs.hyprpanel = {
     # Enable the module.
     enable = true;
 
