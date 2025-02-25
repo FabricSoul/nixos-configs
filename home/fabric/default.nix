@@ -31,6 +31,10 @@
     NIXOS_OZONE_WL = "1";
   };
 
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   # Common packages used across your system
   home.packages = with pkgs; [
     git
