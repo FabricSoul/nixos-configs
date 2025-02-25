@@ -37,10 +37,10 @@
     pkgsUnstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
   in {
     nixosConfigurations = {
-      Tatara = lib.nixosSystem {
+      zion = lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./hosts/zion/default.nix
         ];
       };
     };
@@ -56,7 +56,7 @@
             hyprpanel.overlay
           ];
         }
-        ./home.nix
+        ./home/fabric/default.nix
         nixvim.homeManagerModules.nixvim
         hyprpanel.homeManagerModules.hyprpanel
       ];
