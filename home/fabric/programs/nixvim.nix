@@ -285,6 +285,8 @@
               })
             '';
           };
+          preselect = "cmp.PreselectMode.Item";
+          complition.completeopt = "menu,menuone";
         };
       };
       tmux-navigator.enable = true;

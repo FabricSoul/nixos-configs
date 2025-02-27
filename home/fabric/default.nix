@@ -70,6 +70,8 @@
     delve
     ldtk
     libresprite
+    gh
+    btop
   ];
 
   # Enable home-manager

@@ -22,6 +22,12 @@
 
         alias wails='$(go env GOPATH)/bin/wails'
       '';
+      prezto = {
+        tmux = {
+          autoStartLocal = true;
+          autoStartRemote = true;
+        };
+      };
     };
 
     oh-my-posh = {
