@@ -14,6 +14,7 @@
     ../common/optional/nvidia.nix
     ../common/optional/docker.nix
     ../common/optional/steam.nix
+    ../common/optional/wifi.nix
   ];
 
   # Bootloader

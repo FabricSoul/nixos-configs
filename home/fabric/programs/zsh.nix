@@ -26,6 +26,7 @@
         tmux = {
           autoStartLocal = true;
           autoStartRemote = true;
+          defaultSessionName = "default";
         };
       };
     };

@@ -25,6 +25,7 @@
     kitty
     zsh
     ollama
+    usbutils
   ];
 
   # Enable the OpenSSH daemon

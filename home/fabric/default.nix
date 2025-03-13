@@ -72,6 +72,7 @@
     libresprite
     gh
     btop
+    leetgo
   ];
 
   # Enable home-manager

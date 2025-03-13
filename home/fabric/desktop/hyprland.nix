@@ -9,6 +9,7 @@
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
+      "$browser" = "firefox";
       "$fileManager " = "dolphin";
       "$menu" = "wofi --show drun";
 
@@ -35,6 +36,7 @@
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = [
         "$mainMod, T, exec, $terminal"
+        "$mainMod, B, exec, $browser"
         "$mainMod, Q, killactive"
         "$mainMod, M, exit"
         "$mainMod, E, exec, $fileManager"

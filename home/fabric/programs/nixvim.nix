@@ -1,16 +1,25 @@
 # home/fabric/programs/nixvim.nix
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   programs.nixvim = {
     enable = true;
     plugins = {
+      nui.enable = true;
+      auto-session = {
+        enable = true;
+      };
       cmp-dictionary.enable = true;
       cmp-spell.enable = true;
       toggleterm = {
         enable = true;
+        settings = {
+          open_mapping = "[[<C-t>]]";
+          direction = "float";
+          insert_mappings = true;
+          terminal_mappings = true;
+          start_in_insert = true;
+          persist_size = true;
+          close_on_exit = true;
+        };
       };
       web-devicons.enable = true;
       nix.enable = true;
@@ -28,7 +37,7 @@
         enable = true;
         keymaps = {
           "<leader> " = {
-            action = "git_files";
+            action = "find_files";
           };
         };
         settings = {
@@ -253,14 +262,51 @@
         servers = {
           ts_ls.enable = true;
           eslint.enable = true;
-          nil_ls.enable = true;
+          nil_ls = {
+            enable = true;
+          };
+          lua_ls = {
+            enable = true;
+            settings = {
+              Lua = {
+                hint = {
+                  enable = true;
+                  arrayIndex = "Enable";
+                  setType = true;
+                  paramName = "All";
+                  paramType = true;
+                };
+              };
+            };
+          };
           tailwindcss.enable = true;
-          gopls.enable = true;
+          gopls = {
+            enable = true;
+            settings = {
+              hints = {
+                assignVariableTypes = true;
+                compositeLiteralFields = true;
+                compositeLiteralTypes = true;
+                constantValues = true;
+                functionTypeParameters = true;
+                parameterNames = true;
+                rangeVariableTypes = true;
+              };
+            };
+          };
           rust_analyzer = {
             enable = true;
             installCargo = true;
             installRustc = true;
             installRustfmt = true;
+            settings = {
+              inlayHints = {
+                chainingHints.enable = true;
+                closureReturnTypeHints.enable = "always";
+                parameterHints.enable = true;
+                typeHints.enable = true;
+              };
+            };
           };
         };
       };
@@ -292,6 +338,17 @@
       tmux-navigator.enable = true;
       vim-suda.enable = true;
     };
+    extraPlugins = [
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "plenary.nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "nvim-lua";
+          repo = "plenary.nvim";
+          rev = "v0.1.4";
+          hash = "sha256-zR44d9MowLG1lIbvrRaFTpO/HXKKrO6lbtZfvvTdx+o=";
+        };
+      })
+    ];
     globals.mapleader = " ";
     opts = {
       relativenumber = true;
@@ -425,11 +482,11 @@
       }
 
       # Toggleterm
-      {
-        mode = "n";
-        key = "<leader>t";
-        action = ":ToggleTerm direction=float<CR>";
-      }
+      # {
+      #   mode = "n";
+      #   key = "<leader>t";
+      #   action = ":ToggleTerm direction=float<CR>";
+      # }
     ];
     colorschemes.rose-pine.enable = true;
   };
