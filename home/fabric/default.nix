@@ -73,6 +73,7 @@
     gh
     btop
     leetgo
+    gnumake
   ];
 
   # Enable home-manager
