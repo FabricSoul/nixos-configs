@@ -2,7 +2,93 @@
 {pkgs, ...}: {
   programs.nixvim = {
     enable = true;
+    diagnostic.settings = {
+      enable = true;
+      update_in_insert = true;
+      severity_sort = true;
+
+      # NOTE: Opt-in with 0.11
+      virtual_text = {
+        enable = true;
+        severity.min = "warn";
+        source = "if_many";
+      };
+      virtual_lines = {
+        current_line = true;
+      };
+
+      float = {
+        border = "rounded";
+      };
+
+      jump = {
+        severity.__raw = "vim.diagnostic.severity.WARN";
+      };
+
+      signs = {
+        text = {
+          "__rawKey__vim.diagnostic.severity.ERROR" = "";
+          "__rawKey__vim.diagnostic.severity.WARN" = "";
+          "__rawKey__vim.diagnostic.severity.HINT" = "󰌵";
+          "__rawKey__vim.diagnostic.severity.INFO" = "";
+        };
+        texthl = {
+          "__rawKey__vim.diagnostic.severity.ERROR" = "DiagnosticError";
+          "__rawKey__vim.diagnostic.severity.WARN" = "DiagnosticWarn";
+          "__rawKey__vim.diagnostic.severity.HINT" = "DiagnosticHint";
+          "__rawKey__vim.diagnostic.severity.INFO" = "DiagnosticInfo";
+        };
+      };
+    };
     plugins = {
+      avante = {
+        enable = true;
+        settings = {
+          diff = {
+            autojump = true;
+            debug = false;
+            list_opener = "copen";
+          };
+          highlights = {
+            diff = {
+              current = "DiffText";
+              incoming = "DiffAdd";
+            };
+          };
+          hints = {
+            enabled = true;
+          };
+          mappings = {
+            diff = {
+              both = "cb";
+              next = "]x";
+              none = "c0";
+              ours = "co";
+              prev = "[x";
+              theirs = "ct";
+            };
+            jump = {
+              next = "]]";
+              prev = "[[";
+            };
+          };
+          # provider = "ollama";
+          # ollama = {
+          #   endpoint = "http://127.0.0.1:11434";
+          #   model = "gemma3:12b";
+          # };
+          windows = {
+            sidebar_header = {
+              align = "center";
+              rounded = true;
+            };
+            width = 30;
+            wrap = true;
+          };
+        };
+      };
+      nvim-ufo.enable = true;
+      render-markdown.enable = true;
       nui.enable = true;
       auto-session = {
         enable = true;
@@ -23,7 +109,7 @@
       };
       web-devicons.enable = true;
       nix.enable = true;
-      bufferline.enable = true;
+      bufferline.enable = false;
       lualine.enable = true;
       luasnip.enable = true;
       yanky = {
@@ -34,10 +120,32 @@
       };
       ts-comments.enable = true;
       telescope = {
+        settings = {
+          pickers = {
+            find_files = {
+              hidden = true;
+            };
+          };
+        };
         enable = true;
         keymaps = {
           "<leader> " = {
             action = "find_files";
+          };
+          "<leader>tl" = {
+            action = "live_grep";
+          };
+          "<leader>td" = {
+            action = "lsp_definitions";
+          };
+          "<leader>tr" = {
+            action = "lsp_references";
+          };
+          "<leader>ti" = {
+            action = "lsp_implementations";
+          };
+          "<leader>ts" = {
+            action = "lsp_document_symbols";
           };
         };
         settings = {
@@ -51,11 +159,6 @@
               "%.ipynb"
               "^node_modules/"
               "^.next/"
-              "%.env"
-              "%.env.local"
-              "%.env.development.local"
-              "%.env.test.local"
-              "%.env.production.local"
               "^npm-debug.log"
               "^yarn-debug.log"
               "^yarn-error.log"
@@ -67,7 +170,9 @@
               "^tailwind.config.js.backup"
               "%.css.map"
               "^styles/dist/"
+              ".*_templ%.go$"
             ];
+            hidden = true;
           };
         };
       };
@@ -111,16 +216,16 @@
       indent-blankline.enable = true;
       harpoon = {
         enable = true;
-        keymaps = {
-          addFile = "<leader>ha";
-          toggleQuickMenu = "<C-e>";
-          navFile = {
-            "1" = "<leader>h;";
-            "2" = "<leader>h,";
-            "3" = "<leader>h.";
-            "4" = "<leader>hp";
-          };
-        };
+        # keymaps = {
+        #   addFile = "<leader>ha";
+        #   toggleQuickMenu = "<C-e>";
+        #   navFile = {
+        #     "1" = "<leader>h;";
+        #     "2" = "<leader>h,";
+        #     "3" = "<leader>h.";
+        #     "4" = "<leader>hp";
+        #   };
+        # };
       };
       yazi.enable = true;
       gitsigns = {
@@ -259,9 +364,19 @@
       lsp = {
         enable = true;
         inlayHints = true;
+        keymaps.lspBuf = {
+          K = "hover";
+          gD = "references";
+          gd = "definition";
+          gi = "implementation";
+          gt = "type_definition";
+        };
+
         servers = {
           ts_ls.enable = true;
           eslint.enable = true;
+          templ.enable = true;
+          htmx.enable = true;
           nil_ls = {
             enable = true;
           };
@@ -284,6 +399,7 @@
             enable = true;
             settings = {
               hints = {
+                enable = true;
                 assignVariableTypes = true;
                 compositeLiteralFields = true;
                 compositeLiteralTypes = true;
@@ -339,16 +455,26 @@
       vim-suda.enable = true;
     };
     extraPlugins = [
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "plenary.nvim";
-        src = pkgs.fetchFromGitHub {
-          owner = "nvim-lua";
-          repo = "plenary.nvim";
-          rev = "v0.1.4";
-          hash = "sha256-zR44d9MowLG1lIbvrRaFTpO/HXKKrO6lbtZfvvTdx+o=";
-        };
-      })
     ];
+    extraConfigLua = ''
+      vim.lsp.inlay_hint.enable(true)
+      vim.filetype.add({
+        extension = {
+          cob = "cobweb",
+          cobweb = "cobweb",
+        },
+      })
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.cobweb = {
+        install_info = {
+          url = "~/tree-sitter-cobweb", -- local path or git repo
+          files = {"src/parser.c"},
+          generate_requires_npm = false,
+          requires_generate_from_grammar = false,
+        },
+        filetype = "cobweb",
+      }
+    '';
     globals.mapleader = " ";
     opts = {
       relativenumber = true;
@@ -373,6 +499,42 @@
       colorcolumn = "80";
     };
     keymaps = [
+      {
+        mode = "n";
+        key = "<leader>ha";
+        action.__raw = "function() require'harpoon':list():add() end";
+        options.desc = "Harpoon add file";
+      }
+      {
+        mode = "n";
+        key = "<C-e>";
+        action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
+        options.desc = "Harpoon quick menu";
+      }
+      {
+        mode = "n";
+        key = "<leader>h;";
+        action.__raw = "function() require'harpoon':list():select(1) end";
+        options.desc = "Harpoon file 1";
+      }
+      {
+        mode = "n";
+        key = "<leader>h,";
+        action.__raw = "function() require'harpoon':list():select(2) end";
+        options.desc = "Harpoon file 2";
+      }
+      {
+        mode = "n";
+        key = "<leader>h.";
+        action.__raw = "function() require'harpoon':list():select(3) end";
+        options.desc = "Harpoon file 3";
+      }
+      {
+        mode = "n";
+        key = "<leader>hp";
+        action.__raw = "function() require'harpoon':list():select(4) end";
+        options.desc = "Harpoon file 4";
+      }
       {
         mode = "n";
         key = "<C-h>";
@@ -480,13 +642,6 @@
         key = "<leader>p";
         action = "\"_dP";
       }
-
-      # Toggleterm
-      # {
-      #   mode = "n";
-      #   key = "<leader>t";
-      #   action = ":ToggleTerm direction=float<CR>";
-      # }
     ];
     colorschemes.rose-pine.enable = true;
   };

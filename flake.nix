@@ -2,24 +2,27 @@
   description = "Fabric's flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprpanel = {
       url = "github:jas-singhfsu/hyprpanel";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
       # inputs.home-manager.follows = "home-manager"; # Add this line
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.11";
+      url = "github:nix-community/nixvim/main";
       # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    openapi-tui = {
+      url = "github:zaghaghi/openapi-tui";
     };
   };
 
@@ -30,6 +33,7 @@
     home-manager,
     nixvim,
     hyprpanel,
+    openapi-tui,
     ...
   }: let
     lib = nixpkgs.lib;
@@ -48,7 +52,7 @@
     homeConfigurations.fabric = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit nixvim hyprpanel;
+        inherit nixvim hyprpanel openapi-tui;
       };
       modules = [
         {

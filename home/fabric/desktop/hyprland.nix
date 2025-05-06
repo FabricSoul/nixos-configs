@@ -15,7 +15,7 @@
 
       general = {
         gaps_in = 0;
-        gaps_out = "0, 600, 0, 600";
+        gaps_out = "0, 440, 0, 440";
       };
 
       input = {
@@ -28,9 +28,9 @@
       ];
 
       windowrule = [
-        "workspace 6 silent,^(discord)$"
-        "workspace 4 silent,^(kitty)$"
-        "workspace 5 silent,^(firefox)$"
+        "workspace 6 silent,class:^(discord)$"
+        "workspace 4 silent,class:^(kitty)$"
+        "workspace 5 silent,class:^(firefox)$"
       ];
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
@@ -75,9 +75,10 @@
         "$mainMod SHIFT, 9, movetoworkspace, 9"
         "$mainMod SHIFT, 0, movetoworkspace, 10"
       ];
-      # monitor = [
-      #   "DP-3,preferred,auto,1,workspace=1,addreserved,200,200,0,0"
-      # ];
+
+      monitor = [
+        "DP-3, 3440x1440@144.00HZ, 0x0, 1"
+      ];
     };
   };
   home.sessionVariables.NIXOS_OZONE_WL = "1";

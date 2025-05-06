@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./locale.nix
+    ./tailscale.nix
   ];
 
   # Enable nix flakes
@@ -18,14 +19,18 @@
   # Basic system packages
   environment.systemPackages = with pkgs; [
     vim
+    git
     greetd.greetd
     greetd.tuigreet
     libinput
     libnotify
     kitty
     zsh
-    ollama
+    # ollama
+    ollama-cuda
     usbutils
+    obs-studio
+    obs-studio-plugins.input-overlay
   ];
 
   # Enable the OpenSSH daemon
@@ -50,7 +55,8 @@
     hyprland.enable = true;
     zsh.enable = true;
   };
+  networking.enableIPv6 = false;
 
   # This value determines the NixOS release version
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }

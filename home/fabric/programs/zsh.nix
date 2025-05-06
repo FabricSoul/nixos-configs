@@ -17,10 +17,19 @@
         ];
       };
       initExtra = ''
-        export PATH="/home/fabric/.deno/bin:$PATH"
-        export PATH=$PATH:(go env GOPATH)/bin
 
-        alias wails='$(go env GOPATH)/bin/wails'
+        export PATH="/home/fabric/.deno/bin:$PATH"
+        export PATH="/home/fabric/.local/lib/bin:$PATH"
+        export PATH=$PATH:(go env GOPATH)/bin
+        GOPATH=$HOME/go
+        PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+        PATH="$HOME/.govm/shim:$PATH"
+
+        alias t="tmux"
+        alias ta="tmux attach"
+        alias n="nvim"
+        alias gmt="go mod tidy"
+        alias gmi="go mod init"
       '';
       prezto = {
         tmux = {
