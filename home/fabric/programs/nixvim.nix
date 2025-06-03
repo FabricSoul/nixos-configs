@@ -41,6 +41,7 @@
       };
     };
     plugins = {
+      hardtime.enable = true;
       avante = {
         enable = true;
         settings = {
@@ -72,11 +73,12 @@
               prev = "[[";
             };
           };
-          # provider = "ollama";
-          # ollama = {
-          #   endpoint = "http://127.0.0.1:11434";
-          #   model = "gemma3:12b";
-          # };
+          provider = "ollama";
+          auto_suggestions_provider = "ollama";
+          ollama = {
+            endpoint = "http://127.0.0.1:11434";
+            model = "kirito1/qwen3-coder";
+          };
           windows = {
             sidebar_header = {
               align = "center";
@@ -173,6 +175,13 @@
               ".*_templ%.go$"
             ];
             hidden = true;
+
+            mappings = {
+              n = {
+                # Normal mode mappings
+                q = "close"; # Map 'q' to close the telescope window
+              };
+            };
           };
         };
       };
@@ -268,31 +277,6 @@
           formatters_by_ft = {
             nix = ["alejandra"];
             markdown = ["dprint"];
-            # Use prettierd first, fallback to prettier
-            javascript = {
-              __unkeyed-1 = "prettierd";
-              __unkeyed-2 = "prettier";
-              stop_after_first = true;
-            };
-            typescript = {
-              __unkeyed-1 = "prettierd";
-              __unkeyed-2 = "prettier";
-              stop_after_first = true;
-            };
-            javascriptreact = {
-              __unkeyed-1 = "prettierd";
-              __unkeyed-2 = "prettier";
-              stop_after_first = true;
-            };
-            typescriptreact = {
-              __unkeyed-1 = "prettierd";
-              __unkeyed-2 = "prettier";
-              stop_after_first = true;
-            };
-            css = ["prettier"];
-            scss = ["prettier"];
-            html = ["prettier"];
-            json = ["prettier"];
             # Run on all files
             "_" = ["trim_whitespace" "trim_newlines"];
           };
@@ -301,24 +285,6 @@
             lsp_fallback = true;
           };
           formatters = {
-            prettier = {
-              command = "prettier";
-              args = [
-                "--plugin=prettier-plugin-tailwindcss"
-                "--print-width=80"
-                "--tab-width=2"
-                "--use-tabs=false"
-                "--semi=true"
-                "--single-quote=false"
-                "--trailing-comma=es5"
-                "--bracket-spacing=true"
-              ];
-            };
-            # Optional: Add prettierd for faster formatting
-            prettierd = {
-              command = "prettierd";
-              args = ["$FILENAME"];
-            };
           };
           # Additional useful settings from the docs
           log_level = "warn";

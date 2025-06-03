@@ -113,6 +113,7 @@
     nerd-fonts.envy-code-r
     nerd-fonts.droid-sans-mono
     nerd-fonts.departure-mono
+    font-awesome
 
     wl-clipboard
 
@@ -129,12 +130,10 @@
     tmuxPlugins.sensible
     tmuxPlugins.vim-tmux-navigator
     tmuxPlugins.onedark-theme
-    nodePackages.prettier
     nodePackages.tailwindcss
-    prettierd
-    nodejs_23
     qbittorrent
     go
+    go-blueprint
     gccgo14
     hypridle
     dprint
@@ -160,6 +159,14 @@
     tree-sitter
     heroic
     gimp3
+    p7zip
+    rar
+    nodePackages.localtunnel
+    typst
+    pnpm
+    nodejs_24
+    openssl
+    psmisc
   ];
 
   # Enable home-manager

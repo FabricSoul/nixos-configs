@@ -16,21 +16,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  boot.supportedFilesystems = ["ntfs"];
+
   # Basic system packages
   environment.systemPackages = with pkgs; [
     vim
     git
     greetd.greetd
     greetd.tuigreet
-    libinput
-    libnotify
-    kitty
     zsh
-    # ollama
-    ollama-cuda
-    usbutils
-    obs-studio
-    obs-studio-plugins.input-overlay
   ];
 
   # Enable the OpenSSH daemon
@@ -47,12 +41,8 @@
     };
   };
 
-  # Display manager configuration
-  services.displayManager.defaultSession = "hyprland";
-
   # Default programs
   programs = {
-    hyprland.enable = true;
     zsh.enable = true;
   };
   networking.enableIPv6 = false;

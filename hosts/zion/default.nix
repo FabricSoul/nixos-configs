@@ -41,4 +41,20 @@
     acceleration = "cuda";
     host = "0.0.0.0";
   };
+
+  # Display manager configuration
+  services.displayManager.defaultSession = "hyprland";
+
+  programs.hyprland.enable = true;
+
+  # Basic system packages
+  environment.systemPackages = with pkgs; [
+    libinput
+    libnotify
+    kitty
+    ollama-cuda
+    usbutils
+    obs-studio
+    ntfs3g
+  ];
 }
