@@ -25,6 +25,7 @@
     greetd.greetd
     greetd.tuigreet
     zsh
+    home-manager
   ];
 
   # Enable the OpenSSH daemon
