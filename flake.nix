@@ -41,6 +41,12 @@
     pkgsUnstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
   in {
     nixosConfigurations = {
+      tatara = lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/tatara/default.nix
+        ];
+      };
       zion = lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
