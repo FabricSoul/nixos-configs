@@ -423,6 +423,11 @@
     extraPlugins = [
     ];
     extraConfigLua = ''
+      vim.filetype.add({
+        extension = {
+          ldtk = "json",
+        },
+      })
       vim.lsp.inlay_hint.enable(true)
       vim.filetype.add({
         extension = {

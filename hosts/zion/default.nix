@@ -19,6 +19,7 @@
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.supportedFilesystems = ["nfs"];
 
   # Networking
   networking = {
@@ -33,6 +34,25 @@
     description = "fabric";
     extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.zsh;
+  };
+
+  services.rpcbind.enable = true;
+
+  fileSystems."/home/fabric/nas" = {
+    device = "tatara:/nas";
+    fsType = "nfs";
+    options = [
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=60"
+      "x-systemd.device-timeout=5"
+      "x-systemd.mount-timeout=5"
+      "nfsvers=4" # Use NFSv4
+      "hard" # Hard mount (recommended)
+      "intr" # Allow interruption
+      "rsize=8192" # Read size
+      "wsize=8192" # Write size
+    ];
   };
 
   # Enable Ollama with CUDA
