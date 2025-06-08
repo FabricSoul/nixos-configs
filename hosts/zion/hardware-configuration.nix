@@ -12,20 +12,22 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "thunderbolt" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    rtl88xxau-aircrack
+
+  # Firmware packages
+  hardware.firmware = with pkgs; [
+    linux-firmware
   ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/303cbd05-4811-4560-a136-23ef8fd3a4fa";
+    device = "/dev/disk/by-uuid/c4169025-c398-48c9-8743-d7455645bfa0";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/3083-F950";
+    device = "/dev/disk/by-uuid/842E-71B1";
     fsType = "vfat";
     options = ["fmask=0077" "dmask=0077"];
   };
@@ -37,8 +39,7 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp9s0f3u3u1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp8s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
