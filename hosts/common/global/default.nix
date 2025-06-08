@@ -26,6 +26,7 @@
     greetd.tuigreet
     zsh
     home-manager
+    findutils
   ];
 
   # Enable the OpenSSH daemon
