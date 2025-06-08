@@ -12,15 +12,24 @@
     # Common configurations
     ../common/global
     ../common/optional/docker.nix
+
+    ../common/optional/nfs.nix
   ];
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.supportedFilesystems = ["zfs"];
+  boot.zfs.extraPools = ["nas"];
+
+  services.zfs.autoScrub.enable = true;
+  services.zfs.trim.enable = true;
+
   # Networking
   networking = {
     hostName = "tatara";
+    hostId = "b47100bc";
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
   };
