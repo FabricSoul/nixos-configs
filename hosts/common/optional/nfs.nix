@@ -6,7 +6,7 @@
 
     # Define your exports
     exports = ''
-      /nas 192.168.2.101(rw,sync,no_root_squash,no_subtree_check)
+      /nas 192.168.2.101(rw,sync,no_root_squash,no_subtree_check) 100.0.0.0/8(rw,sync,no_root_squash,no_subtree_check)
     '';
 
     # Enable NFSv4 (recommended)
