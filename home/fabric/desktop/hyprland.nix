@@ -76,6 +76,11 @@
         "$mainMod SHIFT, 0, movetoworkspace, 10"
       ];
 
+      # Mouse binds for dragging windows
+      bindm = [
+        "$mainMod, mouse:272, movewindow" # Super + Left Mouse Button to drag/move windows
+        "$mainMod, mouse:273, resizewindow" # Super + Right Mouse Button to resize windows
+      ];
       monitor = [
         "DP-5, 3440x1440@144.00HZ, 0x0, 1"
       ];
