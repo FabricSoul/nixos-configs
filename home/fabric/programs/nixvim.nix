@@ -73,12 +73,11 @@
               prev = "[[";
             };
           };
-          provider = "ollama";
-          auto_suggestions_provider = "ollama";
-          ollama = {
+          providers.ollama = {
             endpoint = "http://127.0.0.1:11434";
             model = "kirito1/qwen3-coder";
           };
+          auto_suggestions_provider = "ollama";
           windows = {
             sidebar_header = {
               align = "center";

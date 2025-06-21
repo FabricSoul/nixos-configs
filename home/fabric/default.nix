@@ -21,6 +21,7 @@
     ./desktop/hyprpanel.nix
     ./desktop/hyprpaper.nix
     ./desktop/hypridle.nix
+    ./desktop/desktop.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage
@@ -45,6 +46,8 @@
     kitty
     firefox
     mpv
+    grim
+    slurp
 
     nerd-fonts.dejavu-sans-mono
     nerd-fonts.daddy-time-mono
@@ -168,6 +171,8 @@
     psmisc
     air
     pyfa
+
+    google-chrome
   ];
 
   # Enable home-manager
