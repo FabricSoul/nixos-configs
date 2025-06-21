@@ -14,6 +14,8 @@
     ../common/optional/nvidia.nix
     ../common/optional/docker.nix
     ../common/optional/steam.nix
+    ../common/optional/flatpak.nix
+    ../common/optional/fcitx5.nix
   ];
 
   # Bootloader

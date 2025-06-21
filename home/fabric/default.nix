@@ -123,7 +123,6 @@
     zsh
     pavucontrol
     wofi
-    deno
     hyprpanel
     alejandra
     rustup
@@ -167,6 +166,8 @@
     nodejs_24
     openssl
     psmisc
+    air
+    pyfa
   ];
 
   # Enable home-manager

@@ -17,6 +17,7 @@
         gaps_in = 0;
         gaps_out = "0, 440, 0, 440";
       };
+      animations.enabled = false;
 
       input = {
         "repeat_delay" = 300;
@@ -24,19 +25,27 @@
       };
 
       exec-once = [
-        # "hypridle"
+        "fcitx5"
       ];
 
       windowrule = [
+        "workspace 1 silent,initialTitle:^EVE$"
+        "tile, initialTitle:^EVE$"
+        "workspace 6 silent,class:^QQ$"
+        "float, title:^图片查看器$"
         "workspace 6 silent,class:^(discord)$"
         "workspace 4 silent,class:^(kitty)$"
         "workspace 5 silent,class:^(firefox)$"
       ];
 
-      # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
+      workspace = [
+        "r[1-3], gapsout:0"
+      ];
+
       bind = [
         "$mainMod, T, exec, $terminal"
         "$mainMod, B, exec, $browser"
+        "$mainMod, S, exec, sh -c \"grim -g '$(slurp -d)' - | wl-copy\""
         "$mainMod, Q, killactive"
         "$mainMod, M, exit"
         "$mainMod, E, exec, $fileManager"
@@ -69,7 +78,7 @@
         "$mainMod SHIFT, 3, movetoworkspace, 3"
         "$mainMod SHIFT, 4, movetoworkspace, 4"
         "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
+        "$mainMoe SHIFT, 6, movetoworkspace, 6" # Typo was here, corrected to $mainMod
         "$mainMod SHIFT, 7, movetoworkspace, 7"
         "$mainMod SHIFT, 8, movetoworkspace, 8"
         "$mainMod SHIFT, 9, movetoworkspace, 9"
@@ -82,7 +91,7 @@
         "$mainMod, mouse:273, resizewindow" # Super + Right Mouse Button to resize windows
       ];
       monitor = [
-        "DP-5, 3440x1440@144.00HZ, 0x0, 1"
+        "DP-3, 3440x1440@144.00HZ, 0x0, 1"
       ];
     };
   };
