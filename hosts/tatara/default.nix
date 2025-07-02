@@ -14,7 +14,9 @@
     ../common/optional/docker.nix
 
     ../common/optional/nfs.nix
+    ../common/optional/samba.nix
     ../common/optional/plex.nix
+    ../common/optional/qbit.nix
   ];
 
   # Bootloader
