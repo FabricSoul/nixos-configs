@@ -16,6 +16,8 @@
     ../common/optional/steam.nix
     ../common/optional/flatpak.nix
     ../common/optional/fcitx5.nix
+    ../common/optional/bluetooth.nix
+    ../common/optional/sunshine.nix
   ];
 
   # Bootloader

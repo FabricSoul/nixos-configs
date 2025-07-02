@@ -1,6 +1,6 @@
 {
   nixvim,
-  hyprpanel,
+  # hyprpanel,
   pkgs,
   pkgsUnstable,
   config,
@@ -126,7 +126,7 @@
     zsh
     pavucontrol
     wofi
-    hyprpanel
+    # hyprpanel
     alejandra
     rustup
     tmuxPlugins.sensible

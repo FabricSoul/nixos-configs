@@ -1,16 +1,11 @@
 # home/fabric/desktop/hyprpanel.nix
-{
-  config,
-  pkgs,
-  hyprpanel,
-  ...
-}: {
+{pkgs, ...}: {
   # Wayland settings for hyprpanel
-  wayland.windowManager.hyprland.settings = {
-    exec-once = [
-      "${pkgs.hyprpanel}/bin/hyprpanel"
-    ];
-  };
+  # wayland.windowManager.hyprland.settings = {
+  #   exec-once = [
+  #     "${pkgs.hyprpanel}/bin/hyprpanel"
+  #   ];
+  # };
 
   programs.hyprpanel = {
     # Enable the module.
@@ -18,9 +13,6 @@
 
     # Add to Hyprland config
     # hyprland.enable = true;
-
-    # Fix the overwrite issue
-    overwrite.enable = false;
 
     # Configure and theme options
     settings = {

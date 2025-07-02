@@ -3,17 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprpanel = {
-      url = "github:jas-singhfsu/hyprpanel";
-      # inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.home-manager.follows = "home-manager"; # Add this line
     };
 
     nixvim = {
@@ -29,16 +22,13 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
     nixvim,
-    hyprpanel,
     openapi-tui,
     ...
   }: let
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-    pkgsUnstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
   in {
     nixosConfigurations = {
       tatara = lib.nixosSystem {
@@ -58,17 +48,12 @@
     homeConfigurations.fabric = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit nixvim hyprpanel openapi-tui;
+        inherit nixvim openapi-tui; # deleted hyprpanel
       };
       modules = [
-        {
-          nixpkgs.overlays = [
-            hyprpanel.overlay
-          ];
-        }
         ./home/fabric/default.nix
         nixvim.homeManagerModules.nixvim
-        hyprpanel.homeManagerModules.hyprpanel
+        # hyprpanel.homeManagerModules.hyprpanel
       ];
     };
   };
