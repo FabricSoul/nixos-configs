@@ -1,6 +1,6 @@
 {
   nixvim,
-  hyprpanel,
+  # hyprpanel,
   pkgs,
   pkgsUnstable,
   config,
@@ -21,6 +21,7 @@
     ./desktop/hyprpanel.nix
     ./desktop/hyprpaper.nix
     ./desktop/hypridle.nix
+    ./desktop/desktop.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage
@@ -45,6 +46,8 @@
     kitty
     firefox
     mpv
+    grim
+    slurp
 
     nerd-fonts.dejavu-sans-mono
     nerd-fonts.daddy-time-mono
@@ -123,8 +126,7 @@
     zsh
     pavucontrol
     wofi
-    deno
-    hyprpanel
+    # hyprpanel
     alejandra
     rustup
     tmuxPlugins.sensible
@@ -167,6 +169,10 @@
     nodejs_24
     openssl
     psmisc
+    air
+    pyfa
+
+    google-chrome
   ];
 
   # Enable home-manager

@@ -16,6 +16,8 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
 
+  hardware.enableRedistributableFirmware = true;
+
   # Firmware packages
   hardware.firmware = with pkgs; [
     linux-firmware
