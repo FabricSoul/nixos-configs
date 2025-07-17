@@ -1,5 +1,6 @@
 {
   nixvim,
+  zen-browser,
   # hyprpanel,
   pkgs,
   pkgsUnstable,
@@ -22,6 +23,7 @@
     ./desktop/hyprpaper.nix
     ./desktop/hypridle.nix
     ./desktop/desktop.nix
+    zen-browser.homeModules.beta
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage
@@ -39,12 +41,15 @@
   nixpkgs.config = {
     allowUnfree = true;
   };
+  programs.zen-browser.enable = true;
 
   # Common packages used across your system
   home.packages = with pkgs; [
     git
+    lazygit
     kitty
     firefox
+    zen-browser
     mpv
     grim
     slurp
