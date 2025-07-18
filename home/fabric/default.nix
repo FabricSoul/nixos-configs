@@ -53,6 +53,7 @@
     mpv
     grim
     slurp
+    wlsunset
 
     nerd-fonts.dejavu-sans-mono
     nerd-fonts.daddy-time-mono
