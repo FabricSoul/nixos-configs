@@ -54,6 +54,7 @@
     grim
     slurp
     wlsunset
+    newsraft
 
     nerd-fonts.dejavu-sans-mono
     nerd-fonts.daddy-time-mono
