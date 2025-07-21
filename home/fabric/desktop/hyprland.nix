@@ -26,6 +26,7 @@
 
       exec-once = [
         "fcitx5"
+        "wlsunset -l 43.6 -L -79.3"
       ];
 
       windowrule = [

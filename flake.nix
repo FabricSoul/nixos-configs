@@ -2,8 +2,8 @@
   description = "Fabric's flake";
 
   inputs = {
+    # nvidiaPkgs.url = "github:NixOS/nixpkgs/915a9de5b3ab337133e890f21f44deb44598c814";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +28,7 @@
   outputs = {
     self,
     nixpkgs,
+    # nvidiaPkgs,
     home-manager,
     zen-browser,
     nixvim,
@@ -36,6 +37,13 @@
   }: let
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    # nvidiaPkgsWithUnfree = import nvidiaPkgs {
+    #   config = {
+    #     allowUnfree = true;
+    #   };
+    #   overlays = [];
+    #   system = "x86_64-linux";
+    # };
   in {
     nixosConfigurations = {
       tatara = lib.nixosSystem {
@@ -49,6 +57,9 @@
         modules = [
           ./hosts/zion/default.nix
         ];
+        # specialArgs = {
+        #   nvidiaPkgs = nvidiaPkgsWithUnfree;
+        # };
       };
     };
 

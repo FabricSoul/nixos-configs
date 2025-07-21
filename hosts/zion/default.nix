@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
 
     # Common configurations
+    ../common/optional/plasma.nix
     ../common/global
     ../common/optional/nvidia.nix
     ../common/optional/docker.nix
