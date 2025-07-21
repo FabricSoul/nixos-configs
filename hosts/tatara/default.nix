@@ -17,6 +17,7 @@
     ../common/optional/samba.nix
     ../common/optional/plex.nix
     ../common/optional/qbit.nix
+    ../common/optional/caddy.nix
   ];
 
   # Bootloader
