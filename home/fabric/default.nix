@@ -55,6 +55,7 @@
     slurp
     wlsunset
     newsraft
+    ghostty
 
     nerd-fonts.dejavu-sans-mono
     nerd-fonts.daddy-time-mono
