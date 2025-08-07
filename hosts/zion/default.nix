@@ -10,12 +10,12 @@
     ./hardware-configuration.nix
 
     # Common configurations
-    ../common/optional/plasma.nix
+    # ../common/optional/plasma.nix
     ../common/global
     ../common/optional/nvidia.nix
     ../common/optional/docker.nix
     ../common/optional/steam.nix
-    ../common/optional/flatpak.nix
+    # ../common/optional/flatpak.nix
     ../common/optional/fcitx5.nix
     ../common/optional/bluetooth.nix
     ../common/optional/sunshine.nix
@@ -37,7 +37,7 @@
   users.users.fabric = {
     isNormalUser = true;
     description = "fabric";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "video"];
     shell = pkgs.zsh;
   };
 
@@ -68,9 +68,7 @@
   };
 
   # Display manager configuration
-  services.displayManager.defaultSession = "hyprland";
-
-  programs.hyprland.enable = true;
+  services.displayManager.defaultSession = "dwl";
 
   # Basic system packages
   environment.systemPackages = with pkgs; [
