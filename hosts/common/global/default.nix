@@ -37,7 +37,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "''${pkgs.greetd.tuigreet}/bin/tuigreet --time ";
+        command = "''${pkgs.greetd.tuigreet}/bin/tuigreet --time";
         user = "fabric";
       };
     };
@@ -51,4 +51,12 @@
 
   # This value determines the NixOS release version
   system.stateVersion = "25.05";
+
+  hardware.pulseaudio.enable = false; # Disable the actual pulseaudio
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true; # <-- This is the crucial part
+  };
 }
