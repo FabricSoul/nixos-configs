@@ -45,6 +45,12 @@
     # };
   in {
     nixosConfigurations = {
+      solaris = lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/solaris/default.nix
+        ];
+      };
       tatara = lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
