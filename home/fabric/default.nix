@@ -9,7 +9,7 @@
   imports = [
     # Import program configurations
     ./programs/git.nix
-    ./programs/kitty.nix
+    # ./programs/kitty.nix
     ./programs/foot.nix
     ./programs/nixvim.nix
     ./programs/tmux.nix
@@ -23,7 +23,7 @@
     # ./desktop/river.nix
     # ./desktop/hyprpaper.nix
     # ./desktop/hypridle.nix
-    ./desktop/desktop.nix
+    # ./desktop/desktop.nix
     ./desktop/waybar.nix
     ./desktop/mako.nix
   ];
@@ -48,8 +48,8 @@
   home.packages = with pkgs; [
     git
     lazygit
-    kitty
-    firefox
+    # kitty
+    # firefox
     mpv
     grim
     slurp
@@ -105,21 +105,15 @@
     zola
     unzip
     hugo
-    sass
     sshfs
     tree-sitter
-    heroic
-    gimp3
     p7zip
     rar
     nodePackages.localtunnel
     typst
-    pnpm
-    nodejs_24
     openssl
     psmisc
     air
-    pyfa
   ];
 
   # Enable home-manager
