@@ -13,6 +13,8 @@
     ../common/global
     ../common/optional/fcitx5.nix
     ../common/optional/bluetooth.nix
+
+    ../common/optional/kmonad.nix
   ];
 
   # Bootloader

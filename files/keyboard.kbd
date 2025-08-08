@@ -1,0 +1,71 @@
+(defcfg
+  ;; For Linux
+  input  (device-file "/dev/input/event0")
+  output (uinput-sink "My KMonad output")
+  fallthrough true
+  allow-cmd true
+)
+
+(defsrc
+  esc  mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -     =        bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [     ]        ret
+  caps a    s    d    f    g    h    j    k    l    ;    '     \
+  lsft 102d z    x    c    v    b    n    m    ,    .    /              rsft
+  wkup lctl lmet lalt           spc            ralt cmps rctl      back up   fwd
+                                                                   left down rght
+)
+(deflayer base
+  caps mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  $    +    [    {    \(    &    =   \)   }    ]    +    !     |        bspc
+  tab  ;    ,    .    p    y    f    g    c    r    l    /     ]        ret
+  esc @a   @o   @e   @u    i    d   @h   @t   @n   @s    -     \
+  lsft 102d '    q    j    k    x    b    m    w    v    z              rsft
+  wkup lctl lmet @tab           @spc           @bspc ret   rctl      back up   fwd
+                                                                   left down rght
+)
+(deflayer num
+  caps mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  $    +    [    {    \(    &    =   \)    }    ]    +    !     |        bspc
+  tab  ;    7    8    9    y    f    g    c    r    l    /     ]        ret
+  esc  a    4    5    6    0    d    h    t    n    s    -     \
+  lsft 102d '    1    2    3    x    b    m    w    v    z              rsft
+  wkup lctl lmet tab           spc            bspc ret   rctl      back up   fwd
+                                                                   left down rght
+)
+(deflayer symbol
+  caps mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  $    +    [    {    \(    &    =   \)   }    ]    +    !     |        bspc
+  ~  *    !    %    @    ^    f    g    c    r    l    /     ]        ret
+  $  +    [    {   \(    =    d    h    t    n    s    -     \
+  # 102d `    ]    }   \)    &    b    m    w    v    z              rsft
+  wkup lctl lmet tab           spc            bspc ret   rctl      back up   fwd
+                                                                   left down rght
+)
+(deflayer arrow
+  caps mute vold volu                          prnt slck pause ins del  home pgup
+       f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12      end  pgdn
+  $    +    [    {    \(    &    =   \)   }    ]    +    !     |        bspc
+  tab  ;    ,    .    p    y    f    g    c    r    l    /     ]        ret
+  esc @a   @o   @e   @u    i    d   @h   @t   @n   @s    -     \
+  lsft 102d '    q    j    k    x    b    left    down    up    right              rsft
+  wkup lctl lmet tab           @spc           @bspc ret   rctl      back up   fwd
+                                                                   left down rght
+)
+(defalias
+a (tap-hold 200 a lalt)
+o (tap-hold 200 o lmet)
+e (tap-hold 200 e lsft)
+u (tap-hold 200 u lctl)
+h (tap-hold 200 h lctl)
+t (tap-hold 200 t lsft)
+n (tap-hold 200 n lmet)
+s (tap-hold 200 s lalt)
+spc (tap-hold 200 spc (layer-toggle num))
+bspc (tap-hold 200 bspc (layer-toggle symbol))
+tab (tap-hold 200 tab (layer-toggle arrow))
+)

@@ -52,7 +52,6 @@
   # This value determines the NixOS release version
   system.stateVersion = "25.05";
 
-  hardware.pulseaudio.enable = false; # Disable the actual pulseaudio
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
