@@ -8,7 +8,15 @@
         position = "top";
         height = 24;
         modules-left = ["custom/wmenu"];
-        modules-right = ["cpu" "custom/cputemp" "memory" "custom/gputemp" "network" "pulseaudio" "clock" "tray"];
+        modules-right = ["cpu" "custom/cputemp" "temperature" "memory" "custom/gputemp" "battery" "network" "pulseaudio" "clock" "tray"];
+
+        temperature = {
+          format = "{temperature}°C";
+        };
+
+        battery = {
+          format = "󰁹 {capacity}%";
+        };
 
         "custom/wmenu" = {
           format = "";
