@@ -4,7 +4,7 @@
     settings = {
       # This is the main section, equivalent to [main] in foot.ini
       main = {
-        font = "FiraMono Nerd Font Mono:size=24";
+        font = "FiraMono Nerd Font Mono:size=12";
         term = "foot";
         dpi-aware = "yes"; # Use "yes" or "no", or boolean true/false
       };
