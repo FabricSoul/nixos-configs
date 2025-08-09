@@ -15,6 +15,7 @@
     ../common/optional/bluetooth.nix
 
     ../common/optional/kmonad.nix
+    ../common/optional/auto-cpufreq.nix
   ];
 
   # Bootloader
@@ -33,7 +34,7 @@
   users.users.fabric = {
     isNormalUser = true;
     description = "fabric";
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "video"];
     shell = pkgs.zsh;
   };
 
@@ -66,5 +67,8 @@
     foot
     usbutils
     ntfs3g
+    powertop
   ];
+
+  powerManagement.powertop.enable = true;
 }

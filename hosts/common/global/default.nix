@@ -27,6 +27,7 @@
     zsh
     home-manager
     findutils
+    pulseaudio
   ];
 
   # Enable the OpenSSH daemon
@@ -53,9 +54,10 @@
   system.stateVersion = "25.05";
 
   security.rtkit.enable = true;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    pulse.enable = true; # <-- This is the crucial part
+    pulse.enable = true;
   };
 }

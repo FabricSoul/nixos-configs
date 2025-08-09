@@ -67,7 +67,7 @@
     ripgrep
     fd
     lsd
-    pulseaudio
+    brightnessctl
 
     nerd-fonts.fira-mono
 
