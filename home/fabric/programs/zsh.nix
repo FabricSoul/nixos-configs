@@ -23,6 +23,9 @@
         export PATH=$PATH:(go env GOPATH)/bin
         export PATH="/home/fabric/.cargo/bin:$PATH"
         export PATH="/home/fabric/.config/emacs/bin:$PATH"
+        export GPG_TTY=$(tty)
+        export GPG_AGENT_INFO=
+        export GPGPINENTRYMODE=loopback
         GOPATH=$HOME/go
         PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
         PATH="$HOME/.govm/shim:$PATH"
@@ -44,6 +47,7 @@
           fi
           rm -f -- "$tmp"
         }
+        gpg --quiet --decrypt /home/fabric/.local/share/gopass/stores/root/websites/codeberg.org/FabricSoul.gpg >/dev/null
       '';
       prezto = {
         tmux = {

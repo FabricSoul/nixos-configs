@@ -16,9 +16,11 @@
     ./programs/zsh.nix
     ./programs/ssh.nix
     ./programs/yazi.nix
+    ./programs/neomutt.nix
+    ./programs/gpg.nix
 
     # Import desktop configurations
-    # ./desktop/hyprland.nix
+    ./desktop/hyprland.nix
     # ./desktop/hyprpanel.nix
     # ./desktop/river.nix
     # ./desktop/hyprpaper.nix
@@ -68,6 +70,7 @@
     fd
     lsd
     brightnessctl
+    neomutt
 
     nerd-fonts.fira-mono
 
@@ -114,6 +117,11 @@
     openssl
     psmisc
     air
+    w3m
+    gopass
+    pinentry
+    gnupg
+    dig
   ];
 
   # Enable home-manager

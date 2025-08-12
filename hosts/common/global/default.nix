@@ -22,8 +22,8 @@
   environment.systemPackages = with pkgs; [
     vim
     git
-    greetd.greetd
-    greetd.tuigreet
+    greetd
+    tuigreet
     zsh
     home-manager
     findutils
@@ -38,7 +38,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "''${pkgs.greetd.tuigreet}/bin/tuigreet --time";
+        command = "''${pkgs.tuigreet}/bin/tuigreet --time";
         user = "fabric";
       };
     };
