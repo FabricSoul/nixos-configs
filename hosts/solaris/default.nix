@@ -1,4 +1,4 @@
-# hosts/zion/default.nix
+# hosts/solaris/default.nix
 {
   config,
   lib,
@@ -10,15 +10,12 @@
     ./hardware-configuration.nix
 
     # Common configurations
-    # ../common/optional/plasma.nix
     ../common/global
-    ../common/optional/nvidia.nix
-    ../common/optional/docker.nix
-    ../common/optional/steam.nix
-    # ../common/optional/flatpak.nix
     ../common/optional/fcitx5.nix
     ../common/optional/bluetooth.nix
-    ../common/optional/sunshine.nix
+
+    ../common/optional/kmonad.nix
+    ../common/optional/auto-cpufreq.nix
   ];
 
   # Bootloader
@@ -28,7 +25,7 @@
 
   # Networking
   networking = {
-    hostName = "zion";
+    hostName = "solaris";
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
   };
@@ -37,7 +34,7 @@
   users.users.fabric = {
     isNormalUser = true;
     description = "fabric";
-    extraGroups = ["networkmanager" "wheel" "docker" "video"];
+    extraGroups = ["networkmanager" "wheel" "video"];
     shell = pkgs.zsh;
   };
 
@@ -60,13 +57,6 @@
     ];
   };
 
-  # Enable Ollama with CUDA
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-    host = "0.0.0.0";
-  };
-
   # Display manager configuration
   services.displayManager.defaultSession = "dwl";
 
@@ -74,10 +64,11 @@
   environment.systemPackages = with pkgs; [
     libinput
     libnotify
-    kitty
-    ollama-cuda
+    foot
     usbutils
-    obs-studio
     ntfs3g
+    powertop
   ];
+
+  powerManagement.powertop.enable = true;
 }

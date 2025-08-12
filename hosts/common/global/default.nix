@@ -22,11 +22,12 @@
   environment.systemPackages = with pkgs; [
     vim
     git
-    greetd.greetd
-    greetd.tuigreet
+    greetd
+    tuigreet
     zsh
     home-manager
     findutils
+    pulseaudio
   ];
 
   # Enable the OpenSSH daemon
@@ -37,7 +38,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "''${pkgs.greetd.tuigreet}/bin/tuigreet --time ";
+        command = "''${pkgs.tuigreet}/bin/tuigreet --time";
         user = "fabric";
       };
     };
@@ -51,4 +52,12 @@
 
   # This value determines the NixOS release version
   system.stateVersion = "25.05";
+
+  security.rtkit.enable = true;
+  services.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
 }

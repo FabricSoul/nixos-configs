@@ -7,7 +7,6 @@
       update_in_insert = true;
       severity_sort = true;
 
-      # NOTE: Opt-in with 0.11
       virtual_text = {
         enable = true;
         severity.min = "warn";
@@ -111,7 +110,9 @@
       web-devicons.enable = true;
       nix.enable = true;
       bufferline.enable = false;
-      lualine.enable = true;
+      lualine = {
+        enable = false;
+      };
       luasnip.enable = true;
       yanky = {
         enable = true;
@@ -338,6 +339,7 @@
         };
 
         servers = {
+          clangd.enable = true;
           ts_ls.enable = true;
           eslint.enable = true;
           templ.enable = true;
@@ -375,6 +377,9 @@
               };
             };
           };
+          elixirls = {
+            enable = true;
+          };
           rust_analyzer = {
             enable = true;
             installCargo = true;
@@ -388,6 +393,9 @@
                 typeHints.enable = true;
               };
             };
+          };
+          zls = {
+            enable = true;
           };
         };
       };
@@ -422,31 +430,56 @@
     extraPlugins = [
     ];
     extraConfigLua = ''
-      vim.filetype.add({
-        extension = {
-          ldtk = "json",
-        },
-      })
-      vim.lsp.inlay_hint.enable(true)
-      vim.filetype.add({
-        extension = {
-          cob = "cobweb",
-          cobweb = "cobweb",
-        },
-      })
-      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-      parser_config.cobweb = {
-        install_info = {
-          url = "~/tree-sitter-cobweb", -- local path or git repo
-          files = {"src/parser.c"},
-          generate_requires_npm = false,
-          requires_generate_from_grammar = false,
-        },
-        filetype = "cobweb",
-      }
+        vim.cmd [[
+        highlight Normal guibg=none
+        highlight Normal ctermbg=none
+        highlight NonText guibg=none
+        highlight NonText ctermbg=none
+        highlight NormalFloat guibg=none
+        highlight NormalFloat ctermbg=none
+        highlight FloatBorder guibg=none
+        highlight FloatBorder ctermbg=none
+        highlight Pmenu guibg=none
+        highlight Pmenu ctermbg=none
+        highlight PmenuSel guibg=none
+        highlight PmenuSel ctermbg=none
+        highlight TelescopeNormal guibg=none
+        highlight TelescopeNormal ctermbg=none
+        highlight TelescopeBorder guibg=none
+        highlight TelescopeBorder ctermbg=none
+        highlight TermNormal guibg=none
+        highlight TermNormal ctermbg=none
+        highlight TermFloat guibg=none
+        highlight TermFloat ctermbg=none
+        highlight SignColumn guibg=none
+      ]]
+
+            vim.filetype.add({
+              extension = {
+                ldtk = "json",
+              },
+            })
+            vim.lsp.inlay_hint.enable(true)
+            vim.filetype.add({
+              extension = {
+                cob = "cobweb",
+                cobweb = "cobweb",
+              },
+            })
+            local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+            parser_config.cobweb = {
+              install_info = {
+                url = "~/tree-sitter-cobweb", -- local path or git repo
+                files = {"src/parser.c"},
+                generate_requires_npm = false,
+                requires_generate_from_grammar = false,
+              },
+              filetype = "cobweb",
+            }
     '';
     globals.mapleader = " ";
     opts = {
+      laststatus = 0;
       relativenumber = true;
       number = true;
       tabstop = 2;
@@ -611,6 +644,11 @@
         mode = "x";
         key = "<leader>p";
         action = "\"_dP";
+      }
+      {
+        action = "<cmd>LspStop<CR>";
+        key = "<leader>ls";
+        mode = ["n"];
       }
     ];
     colorschemes.rose-pine.enable = true;
