@@ -47,7 +47,7 @@
           fi
           rm -f -- "$tmp"
         }
-        gpg --quiet --decrypt /home/fabric/.local/share/gopass/stores/root/websites/codeberg.org/FabricSoul.gpg >/dev/null
+        gpg --pinentry-mode=loopback --quiet --decrypt /home/fabric/.local/share/gopass/stores/root/websites/codeberg.org/FabricSoul.gpg >/dev/null
       '';
       prezto = {
         tmux = {

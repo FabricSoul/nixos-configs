@@ -13,6 +13,7 @@
     ../common/global
     ../common/optional/fcitx5.nix
     ../common/optional/bluetooth.nix
+    ../common/optional/steam.nix
 
     ../common/optional/kmonad.nix
     ../common/optional/auto-cpufreq.nix
