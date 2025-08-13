@@ -122,6 +122,7 @@
     pinentry
     gnupg
     dig
+    zathura
   ];
 
   # Enable home-manager
