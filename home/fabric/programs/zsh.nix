@@ -26,6 +26,7 @@
         export GPG_TTY=$(tty)
         export GPG_AGENT_INFO=
         export GPGPINENTRYMODE=loopback
+        export BROWSER=/home/fabric/.nix-profile/bin/qutebrowser
         GOPATH=$HOME/go
         PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
         PATH="$HOME/.govm/shim:$PATH"
