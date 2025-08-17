@@ -225,16 +225,6 @@
       indent-blankline.enable = true;
       harpoon = {
         enable = true;
-        # keymaps = {
-        #   addFile = "<leader>ha";
-        #   toggleQuickMenu = "<C-e>";
-        #   navFile = {
-        #     "1" = "<leader>h;";
-        #     "2" = "<leader>h,";
-        #     "3" = "<leader>h.";
-        #     "4" = "<leader>hp";
-        #   };
-        # };
       };
       yazi.enable = true;
       gitsigns = {
@@ -504,39 +494,69 @@
     keymaps = [
       {
         mode = "n";
-        key = "<leader>ha";
+        key = "<M-m>";
         action.__raw = "function() require'harpoon':list():add() end";
         options.desc = "Harpoon add file";
       }
       {
         mode = "n";
-        key = "<C-e>";
+        key = "<M-i>";
         action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
         options.desc = "Harpoon quick menu";
       }
       {
         mode = "n";
-        key = "<leader>h;";
+        key = "<M-1>";
         action.__raw = "function() require'harpoon':list():select(1) end";
         options.desc = "Harpoon file 1";
       }
       {
         mode = "n";
-        key = "<leader>h,";
+        key = "<M-2>";
         action.__raw = "function() require'harpoon':list():select(2) end";
         options.desc = "Harpoon file 2";
       }
       {
         mode = "n";
-        key = "<leader>h.";
+        key = "<M-3>";
         action.__raw = "function() require'harpoon':list():select(3) end";
         options.desc = "Harpoon file 3";
       }
       {
         mode = "n";
-        key = "<leader>hp";
+        key = "<M-4>";
         action.__raw = "function() require'harpoon':list():select(4) end";
         options.desc = "Harpoon file 4";
+      }
+      {
+        mode = "n";
+        key = "<M-5>";
+        action.__raw = "function() require'harpoon':list():select(5) end";
+        options.desc = "Harpoon file 5";
+      }
+      {
+        mode = "n";
+        key = "<M-6>";
+        action.__raw = "function() require'harpoon':list():select(6) end";
+        options.desc = "Harpoon file 6";
+      }
+      {
+        mode = "n";
+        key = "<M-7>";
+        action.__raw = "function() require'harpoon':list():select(7) end";
+        options.desc = "Harpoon file 7";
+      }
+      {
+        mode = "n";
+        key = "<M-8>";
+        action.__raw = "function() require'harpoon':list():select(8) end";
+        options.desc = "Harpoon file 8";
+      }
+      {
+        mode = "n";
+        key = "<M-9>";
+        action.__raw = "function() require'harpoon':list():select(9) end";
+        options.desc = "Harpoon file 9";
       }
       {
         mode = "n";
@@ -547,24 +567,24 @@
           remap = true;
         };
       }
-      {
-        mode = "n";
-        key = "<C-j>";
-        action = "<C-w>j";
-        options = {
-          desc = "Go to Lower Window";
-          remap = true;
-        };
-      }
-      {
-        mode = "n";
-        key = "<C-k>";
-        action = "<C-w>k";
-        options = {
-          desc = "Go to Upper Window";
-          remap = true;
-        };
-      }
+      # {
+      #   mode = "n";
+      #   key = "<C-j>";
+      #   action = "<C-w>j";
+      #   options = {
+      #     desc = "Go to Lower Window";
+      #     remap = true;
+      #   };
+      # }
+      # {
+      #   mode = "n";
+      #   key = "<C-k>";
+      #   action = "<C-w>k";
+      #   options = {
+      #     desc = "Go to Upper Window";
+      #     remap = true;
+      #   };
+      # }
       {
         mode = "n";
         key = "<C-l>";

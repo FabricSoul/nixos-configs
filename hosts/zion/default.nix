@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
 
     # Common configurations
-    # ../common/optional/plasma.nix
+    ../common/optional/plasma.nix
     ../common/global
     ../common/optional/nvidia.nix
     ../common/optional/docker.nix
@@ -68,7 +68,7 @@
   };
 
   # Display manager configuration
-  services.displayManager.defaultSession = "dwl";
+  services.displayManager.defaultSession = "plasma";
 
   # Basic system packages
   environment.systemPackages = with pkgs; [
@@ -79,5 +79,6 @@
     usbutils
     obs-studio
     ntfs3g
+    firefox
   ];
 }
