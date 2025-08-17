@@ -123,6 +123,7 @@
     gnupg
     dig
     zathura
+    librewolf
   ];
 
   # Enable home-manager
