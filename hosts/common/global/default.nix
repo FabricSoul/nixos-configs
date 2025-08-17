@@ -28,6 +28,7 @@
     home-manager
     findutils
     pulseaudio
+    rsync
   ];
 
   # Enable the OpenSSH daemon
