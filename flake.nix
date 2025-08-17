@@ -3,7 +3,7 @@
 
   inputs = {
     # nvidiaPkgs.url = "github:NixOS/nixpkgs/915a9de5b3ab337133e890f21f44deb44598c814";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
