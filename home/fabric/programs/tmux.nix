@@ -16,6 +16,8 @@
     extraConfig = ''
       setw -g pane-base-index 1
 
+      set -g allow-passthrough on
+
 
       # Vi copy mode bindings
       bind-key -T copy-mode-vi v send-keys -X begin-selection
