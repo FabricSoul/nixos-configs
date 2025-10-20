@@ -38,7 +38,7 @@
         alias gmi="go mod init"
         alias flake="nix flake"
         alias ls="lsd"
-        alias ll="lsd -l"
+        alias ll="lsd -la"
         alias emacs="emacs -nw"
         function y() {
           local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

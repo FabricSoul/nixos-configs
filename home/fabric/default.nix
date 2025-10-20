@@ -124,6 +124,15 @@
     dig
     zathura
     librewolf
+
+    heroic
+    solana-cli
+    nodejs
+    anchor
+    yarn
+    discord
+    cloudflared
+    monero-cli
   ];
 
   # Enable home-manager
