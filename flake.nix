@@ -23,27 +23,24 @@
       url = "git+https://codeberg.org/FabricSoul/dwl";
       flake = true;
     };
+    eden = {
+      url = "github:grantimatter/eden-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
-    # nvidiaPkgs,
     home-manager,
     nixvim,
     openapi-tui,
     fabric-dwl,
+    eden,
     ...
   }: let
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-    # nvidiaPkgsWithUnfree = import nvidiaPkgs {
-    #   config = {
-    #     allowUnfree = true;
-    #   };
-    #   overlays = [];
-    #   system = "x86_64-linux";
-    # };
   in {
     nixosConfigurations = {
       solaris = lib.nixosSystem {
@@ -63,16 +60,13 @@
         modules = [
           ./hosts/zion/default.nix
         ];
-        # specialArgs = {
-        #   nvidiaPkgs = nvidiaPkgsWithUnfree;
-        # };
       };
     };
 
     homeConfigurations.fabric = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit nixvim openapi-tui;
+        inherit nixvim openapi-tui eden;
       };
       modules = [
         ./home/fabric/default.nix

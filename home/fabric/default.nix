@@ -18,6 +18,7 @@
     ./programs/yazi.nix
     ./programs/neomutt.nix
     ./programs/gpg.nix
+    ./programs/eden.nix
 
     # Import desktop configurations
     # ./desktop/hyprland.nix
