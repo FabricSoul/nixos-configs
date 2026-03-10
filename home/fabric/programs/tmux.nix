@@ -5,6 +5,7 @@
     plugins = with pkgs.tmuxPlugins; [
       sensible
       vim-tmux-navigator
+      resurrect
     ];
 
     # General settings

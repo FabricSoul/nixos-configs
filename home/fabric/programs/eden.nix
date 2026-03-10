@@ -4,6 +4,6 @@
   ...
 }: {
   home.packages = [
-    eden.packages.${pkgs.system}.default
+    eden.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

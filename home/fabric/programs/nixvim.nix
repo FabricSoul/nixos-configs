@@ -2,6 +2,7 @@
 {pkgs, ...}: {
   programs.nixvim = {
     enable = true;
+    enableMan = false;
     diagnostic.settings = {
       enable = true;
       update_in_insert = true;

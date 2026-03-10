@@ -6,7 +6,11 @@
 }: {
   programs.git = {
     enable = true;
-    userName = "FabricSoul";
-    userEmail = "fabric.soul7@gmail.com";
+    settings = {
+      user = {
+        name = "FabricSoul";
+        email = "fabric.soul7@gmail.com";
+      };
+    };
   };
 }
