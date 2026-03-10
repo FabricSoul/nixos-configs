@@ -19,6 +19,9 @@
     ../common/optional/fcitx5.nix
     ../common/optional/bluetooth.nix
     ../common/optional/sunshine.nix
+
+    ../common/optional/qemu.nix
+    ../common/optional/gnome.nix
   ];
 
   # Bootloader
@@ -31,6 +34,7 @@
     hostName = "zion";
     networkmanager.enable = true;
     useDHCP = lib.mkDefault true;
+    firewall.enable = false;
   };
 
   # User configuration
@@ -61,11 +65,11 @@
   };
 
   # Enable Ollama with CUDA
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-    host = "0.0.0.0";
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   acceleration = "cuda";
+  #   host = "0.0.0.0";
+  # };
 
   # Display manager configuration
   services.displayManager.defaultSession = "plasma";
