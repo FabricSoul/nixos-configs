@@ -1,3 +1,11 @@
 result/*
 result
 tatara.caracal-vector*
+
+# Wallet files and keys
+MyWallet
+MyWallet.keys
+xmr
+xmr.keys
+monero-wallet-cli.log
+*.keys
