@@ -40,7 +40,9 @@
     ...
   }: let
     lib = nixpkgs.lib;
-    pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    pkgs = import nixpkgs {
+      system = "x86_64-linux";
+    };
   in {
     nixosConfigurations = {
       solaris = lib.nixosSystem {
@@ -73,7 +75,7 @@
         nixvim.homeModules.nixvim
         ({pkgs, ...}: {
           home.packages = [
-            fabric-dwl.packages.${pkgs.system}.default
+            fabric-dwl.packages.${pkgs.stdenv.hostPlatform.system}.default
           ];
         })
       ];

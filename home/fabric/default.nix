@@ -120,20 +120,28 @@
     air
     w3m
     gopass
-    pinentry
+    pinentry-curses
     gnupg
     dig
     zathura
     librewolf
 
     heroic
-    solana-cli
+    # solana-cli
     nodejs
     anchor
     yarn
     discord
     cloudflared
     monero-cli
+    signal-desktop
+    wireguard-tools
+    pkg-config
+
+    thunderbird-latest-unwrapped
+    tigervnc
+    claude-code
+    alvr
   ];
 
   # Enable home-manager
