@@ -95,6 +95,25 @@
     pkg-config
 
     claude-code
+
+    # CLI tools (moved from homebrew)
+    gh
+    jq
+    htop
+    aria2
+    just
+    zoxide
+    socat
+    imagemagick
+    coreutils
+    actionlint
+    pnpm
+    deno
+    unar
+    nmap
+    helix
+    cargo-c
+    fastfetch
   ];
 
   # Enable home-manager
