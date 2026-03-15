@@ -67,13 +67,15 @@
       upgrade = false;
       cleanup = "none";
     };
+    taps = [
+      "nikitabobko/tap"
+    ];
     casks = [
-      "aerospace"
+      "nikitabobko/tap/aerospace"
       "audacity"
       "balenaetcher"
       "cyberduck"
       "deskflow"
-      "discord"
       "ghidra"
       "ghostty"
       "gimp"
@@ -84,19 +86,20 @@
       "obsidian"
       "orbstack"
       "qbittorrent"
-      "qq"
       "signal"
       "temurin"
       "thunderbird"
       "tor-browser"
       "vlc"
-      "wechat"
       "wezterm"
       "windsurf"
       "xquartz"
       "zed"
       "zen"
     ];
+    masApps = {
+      "WeChat" = 836500024;
+    };
   };
 
   # Fonts
