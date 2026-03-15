@@ -22,9 +22,13 @@
 
       # Vi copy mode bindings
       bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
+      if-shell "uname | grep -q Darwin" \
+        "bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'pbcopy'" \
+        "bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy'"
       bind-key P paste-buffer
-      bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "wl-copy"
+      if-shell "uname | grep -q Darwin" \
+        "bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'pbcopy'" \
+        "bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'wl-copy'"
       set-option -g status-position top
 
       set -g status-style 'fg=#CDD6F4,bg=default'

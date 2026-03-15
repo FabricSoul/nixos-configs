@@ -9,6 +9,10 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixvim = {
       url = "github:nix-community/nixvim/main";
@@ -33,6 +37,7 @@
     self,
     nixpkgs,
     home-manager,
+    nix-darwin,
     nixvim,
     openapi-tui,
     fabric-dwl,
@@ -72,12 +77,35 @@
       };
       modules = [
         ./home/fabric/default.nix
+        ./home/fabric/linux.nix
         nixvim.homeModules.nixvim
         ({pkgs, ...}: {
           home.packages = [
             fabric-dwl.packages.${pkgs.stdenv.hostPlatform.system}.default
           ];
         })
+      ];
+    };
+
+    darwinConfigurations."Cirila" = nix-darwin.lib.darwinSystem {
+      specialArgs = {inherit nixvim openapi-tui;};
+      modules = [
+        ./hosts/cirila
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.fabric = {
+            imports = [
+              ./home/fabric
+              ./home/fabric/darwin.nix
+              nixvim.homeModules.nixvim
+            ];
+          };
+          home-manager.extraSpecialArgs = {
+            inherit nixvim openapi-tui;
+          };
+        }
       ];
     };
   };
