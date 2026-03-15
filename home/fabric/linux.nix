@@ -46,5 +46,7 @@
     tigervnc
     alvr
     brightnessctl
+    gccgo14
+    monero-cli
   ];
 }

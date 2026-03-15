@@ -59,7 +59,6 @@
     nodePackages.tailwindcss
     go
     go-blueprint
-    gccgo14
     dprint
     delve
     btop
@@ -92,7 +91,6 @@
     anchor
     yarn
     cloudflared
-    monero-cli
     wireguard-tools
     pkg-config
 

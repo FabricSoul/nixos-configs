@@ -17,6 +17,7 @@
   programs.zsh.enable = true;
 
   # User
+  system.primaryUser = "fabric";
   users.users.fabric = {
     home = "/Users/fabric";
     shell = pkgs.zsh;
