@@ -115,6 +115,11 @@
     cargo-c
     fastfetch
     qmk
+    gcc-arm-embedded
+    avrdude
+    dfu-programmer
+    dfu-util
+    dos2unix
   ];
 
   # Enable home-manager
