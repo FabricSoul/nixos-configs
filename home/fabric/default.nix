@@ -114,6 +114,7 @@
     helix
     cargo-c
     fastfetch
+    qmk
   ];
 
   # Enable home-manager

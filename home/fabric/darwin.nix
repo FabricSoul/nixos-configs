@@ -2,6 +2,7 @@
 {pkgs, ...}: {
   imports = [
     ./programs/aerospace.nix
+    ./programs/ghostty.nix
   ];
 
   home.homeDirectory = "/Users/fabric";

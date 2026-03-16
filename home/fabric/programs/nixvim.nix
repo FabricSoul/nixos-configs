@@ -457,16 +457,7 @@
                 cobweb = "cobweb",
               },
             })
-            local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-            parser_config.cobweb = {
-              install_info = {
-                url = "~/tree-sitter-cobweb", -- local path or git repo
-                files = {"src/parser.c"},
-                generate_requires_npm = false,
-                requires_generate_from_grammar = false,
-              },
-              filetype = "cobweb",
-            }
+            vim.treesitter.language.register("cobweb", "cobweb")
     '';
     globals.mapleader = " ";
     opts = {

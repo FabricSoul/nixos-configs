@@ -24,68 +24,97 @@
     outer.right = 4
 
     [mode.main.binding]
-    # Focus windows (dwl: Super+j/k)
-    cmd-j = 'focus down'
-    cmd-k = 'focus up'
-    cmd-h = 'focus left'
-    cmd-l = 'focus right'
+    # Focus windows (dwl: Super+j/k) — wrap around in workspace
+    ctrl-j = 'focus --boundaries workspace down'
+    ctrl-k = 'focus --boundaries workspace up'
+    ctrl-h = 'focus --boundaries workspace left'
+    ctrl-l = 'focus --boundaries workspace right'
 
     # Move windows
-    cmd-shift-j = 'move down'
-    cmd-shift-k = 'move up'
-    cmd-shift-h = 'move left'
-    cmd-shift-l = 'move right'
+    ctrl-shift-j = 'move down'
+    ctrl-shift-k = 'move up'
+    ctrl-shift-h = 'move left'
+    ctrl-shift-l = 'move right'
 
     # Resize (dwl: Super+Left/Right)
-    cmd-left = 'resize width -50'
-    cmd-right = 'resize width +50'
-    cmd-up = 'resize height +50'
-    cmd-down = 'resize height -50'
+    ctrl-left = 'resize width -50'
+    ctrl-right = 'resize width +50'
+    ctrl-up = 'resize height +50'
+    ctrl-down = 'resize height -50'
 
     # Layouts (dwl: Super+w tile, Super+v monocle)
-    cmd-w = 'layout tiles horizontal vertical'
-    cmd-v = 'layout accordion horizontal vertical'
+    ctrl-w = 'layout tiles horizontal vertical'
+    ctrl-v = 'layout accordion horizontal vertical'
 
     # Toggle float (dwl: Super+f)
-    cmd-f = 'layout floating tiling'
+    ctrl-f = 'layout floating tiling'
 
     # Fullscreen (dwl: Super+e)
-    cmd-e = 'fullscreen'
+    ctrl-e = 'fullscreen'
 
     # Close window (dwl: Super+q)
-    cmd-q = 'close'
+    ctrl-q = 'close'
 
     # Workspaces (dwl: Super+1-9)
-    cmd-1 = 'workspace 1'
-    cmd-2 = 'workspace 2'
-    cmd-3 = 'workspace 3'
-    cmd-4 = 'workspace 4'
-    cmd-5 = 'workspace 5'
-    cmd-6 = 'workspace 6'
-    cmd-7 = 'workspace 7'
-    cmd-8 = 'workspace 8'
-    cmd-9 = 'workspace 9'
+    ctrl-1 = 'workspace 1'
+    ctrl-2 = 'workspace 2'
+    ctrl-3 = 'workspace 3'
+    ctrl-4 = 'workspace 4'
+    ctrl-5 = 'workspace 5'
+    ctrl-6 = 'workspace 6'
+    ctrl-7 = 'workspace 7'
+    ctrl-8 = 'workspace 8'
+    ctrl-9 = 'workspace 9'
 
     # Move to workspace (dwl: Super+Shift+1-9)
-    cmd-shift-1 = 'move-node-to-workspace 1'
-    cmd-shift-2 = 'move-node-to-workspace 2'
-    cmd-shift-3 = 'move-node-to-workspace 3'
-    cmd-shift-4 = 'move-node-to-workspace 4'
-    cmd-shift-5 = 'move-node-to-workspace 5'
-    cmd-shift-6 = 'move-node-to-workspace 6'
-    cmd-shift-7 = 'move-node-to-workspace 7'
-    cmd-shift-8 = 'move-node-to-workspace 8'
-    cmd-shift-9 = 'move-node-to-workspace 9'
+    ctrl-shift-1 = 'move-node-to-workspace 1'
+    ctrl-shift-2 = 'move-node-to-workspace 2'
+    ctrl-shift-3 = 'move-node-to-workspace 3'
+    ctrl-shift-4 = 'move-node-to-workspace 4'
+    ctrl-shift-5 = 'move-node-to-workspace 5']
+    ctrl-shift-6 = 'move-node-to-workspace 6']
+    ctrl-shift-7 = 'move-node-to-workspace 7'
+    ctrl-shift-8 = 'move-node-to-workspace 8'
+    ctrl-shift-9 = 'move-node-to-workspace 9'
 
     # Previous workspace (dwl: Super+Tab)
-    cmd-tab = 'workspace-back-and-forth'
+    ctrl-tab = 'workspace-back-and-forth'
 
     # Launch apps (dwl: Super+t terminal, Super+b browser)
-    cmd-t = 'exec-and-forget open -a Ghostty'
-    cmd-b = 'exec-and-forget open -a Zen'
+    ctrl-t = 'exec-and-forget open -a Ghostty'
+    ctrl-b = 'exec-and-forget open -a Zen'
 
     # Resize mode (dwl: Super+Left/Right for finer control)
-    cmd-r = 'mode resize'
+    ctrl-r = 'mode resize'
+
+    # Window rules — assign apps to workspaces (mirrors river rules)
+    # Workspace 4: Terminal
+    [[on-window-detected]]
+    if.app-id = 'com.mitchellh.ghostty'
+    run = ['move-node-to-workspace 4']
+
+    # Workspace 5: Browser (firefox on river)
+    [[on-window-detected]]
+    if.app-id = 'org.mozilla.firefox'
+    run = ['move-node-to-workspace 5']
+
+    # Workspace 6: Chat (QQ, Discord on river)
+    [[on-window-detected]]
+    if.app-id = 'com.tencent.qq'
+    run = ['move-node-to-workspace 6']
+
+    [[on-window-detected]]
+    if.app-id = 'com.hnc.Discord'
+    run = ['move-node-to-workspace 6']
+
+    [[on-window-detected]]
+    if.app-id = 'com.tencent.xinWeChat'
+    run = ['move-node-to-workspace 6']
+
+    # Workspace 7: Email
+    [[on-window-detected]]
+    if.app-id = 'org.mozilla.thunderbird'
+    run = ['move-node-to-workspace 7']
 
     [mode.resize.binding]
     h = 'resize width -50'

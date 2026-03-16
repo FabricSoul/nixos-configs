@@ -59,6 +59,58 @@
     };
   };
 
+  # Disable Spotlight, set input method switch to Cmd+Space
+  # (physical Ctrl+Space after Ctrl↔Cmd swap)
+  # Accent color: Blue (matches Catppuccin)
+  system.defaults.CustomUserPreferences.NSGlobalDomain = {
+    AppleAccentColor = 4;
+    AppleHighlightColor = "0.698039 0.843137 0.992157 Blue";
+  };
+
+  system.defaults.CustomUserPreferences."com.apple.symbolichotkeys" = {
+    AppleSymbolicHotKeys = {
+      # 64 = Spotlight search, 65 = Finder search — disabled
+      "64" = { enabled = false; };
+      "65" = { enabled = false; };
+      # 60 = Select previous input source → Cmd+Space
+      "60" = {
+        enabled = true;
+        value = {
+          parameters = [ 32 49 1048576 ];
+          type = "standard";
+        };
+      };
+    };
+  };
+
+  # Swap Ctrl ↔ Cmd so Super key (QMK Cmd) → Ctrl for Aerospace,
+  # and physical Ctrl → Cmd for system copy/paste (Linux-like behavior)
+  system.keyboard = {
+    enableKeyMapping = true;
+    userKeyMapping = [
+      # Left Cmd → Left Ctrl
+      {
+        HIDKeyboardModifierMappingSrc = 30064771299; # 0x7000000E3
+        HIDKeyboardModifierMappingDst = 30064771296; # 0x7000000E0
+      }
+      # Left Ctrl → Left Cmd
+      {
+        HIDKeyboardModifierMappingSrc = 30064771296; # 0x7000000E0
+        HIDKeyboardModifierMappingDst = 30064771299; # 0x7000000E3
+      }
+      # Right Cmd → Right Ctrl
+      {
+        HIDKeyboardModifierMappingSrc = 30064771303; # 0x7000000E7
+        HIDKeyboardModifierMappingDst = 30064771300; # 0x7000000E4
+      }
+      # Right Ctrl → Right Cmd
+      {
+        HIDKeyboardModifierMappingSrc = 30064771300; # 0x7000000E4
+        HIDKeyboardModifierMappingDst = 30064771303; # 0x7000000E7
+      }
+    ];
+  };
+
   # Homebrew
   homebrew = {
     enable = true;
@@ -85,6 +137,7 @@
       "ngrok"
       "obsidian"
       "orbstack"
+      "raycast"
       "qbittorrent"
       "signal"
       "temurin"
