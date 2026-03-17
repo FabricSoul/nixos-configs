@@ -19,7 +19,7 @@
       initContent = ''
 
         export PATH="$HOME/.deno/bin:$PATH"
-        export PATH="$HOME/.local/lib/bin:$PATH"
+        export PATH="$HOME/.local/bin:$HOME/.local/lib/bin:$PATH"
         export PATH=$PATH:(go env GOPATH)/bin
         export PATH="$HOME/.config/emacs/bin:$PATH"
         export GPG_TTY=$(tty)

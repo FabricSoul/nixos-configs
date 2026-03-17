@@ -120,6 +120,7 @@
     dfu-programmer
     dfu-util
     dos2unix
+    uv
   ];
 
   # Enable home-manager

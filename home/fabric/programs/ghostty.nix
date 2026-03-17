@@ -32,6 +32,9 @@
     palette = 14=#94E2D5
     palette = 15=#A6ADC8
 
+    # Select auto-copies (like X11 primary selection)
+    copy-on-select = clipboard
+
     # Disable Ghostty tabs — use tmux instead
     keybind = cmd+t=unbind
     keybind = cmd+shift+t=unbind

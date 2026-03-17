@@ -122,13 +122,15 @@
     taps = [
       "nikitabobko/tap"
     ];
+    brews = [
+      "ghidra"
+    ];
     casks = [
       "nikitabobko/tap/aerospace"
       "audacity"
       "balenaetcher"
       "cyberduck"
       "deskflow"
-      "ghidra"
       "ghostty"
       "gimp"
       "krita"
