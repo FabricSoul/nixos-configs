@@ -18,14 +18,15 @@
       };
       initContent = ''
 
-        export PATH="/home/fabric/.deno/bin:$PATH"
-        export PATH="/home/fabric/.local/lib/bin:$PATH"
+        export PATH="$HOME/.npm-global/bin:$PATH"
+        export PATH="$HOME/.deno/bin:$PATH"
+        export PATH="$HOME/.local/bin:$HOME/.local/lib/bin:$PATH"
         export PATH=$PATH:(go env GOPATH)/bin
-        export PATH="/home/fabric/.config/emacs/bin:$PATH"
+        export PATH="$HOME/.config/emacs/bin:$PATH"
         export GPG_TTY=$(tty)
         export GPG_AGENT_INFO=
         export GPGPINENTRYMODE=loopback
-        export BROWSER=/home/fabric/.nix-profile/bin/qutebrowser
+        export BROWSER=$HOME/.nix-profile/bin/qutebrowser
         GOPATH=$HOME/go
         PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
         PATH="$HOME/.govm/shim:$PATH"
@@ -47,7 +48,7 @@
           fi
           rm -f -- "$tmp"
         }
-        gpg --pinentry-mode=loopback --quiet --decrypt /home/fabric/.local/share/gopass/stores/root/websites/codeberg.org/FabricSoul.gpg >/dev/null
+        gpg --pinentry-mode=loopback --quiet --decrypt $HOME/.local/share/gopass/stores/root/websites/codeberg.org/FabricSoul.gpg >/dev/null
       '';
       prezto = {
         tmux = {

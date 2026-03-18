@@ -10,37 +10,21 @@
     # Import program configurations
     ./programs/git.nix
     # ./programs/kitty.nix
-    ./programs/foot.nix
     ./programs/nixvim.nix
     ./programs/tmux.nix
     ./programs/zsh.nix
     ./programs/ssh.nix
     ./programs/yazi.nix
-    ./programs/neomutt.nix
-    ./programs/gpg.nix
-    ./programs/eden.nix
-
-    # Import desktop configurations
-    # ./desktop/hyprland.nix
-    # ./desktop/hyprpanel.nix
-    # ./desktop/river.nix
-    # ./desktop/hyprpaper.nix
-    # ./desktop/hypridle.nix
-    # ./desktop/desktop.nix
-    ./desktop/waybar.nix
-    ./desktop/mako.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage
   home.username = "fabric";
-  home.homeDirectory = "/home/fabric";
   home.stateVersion = "25.05";
 
   # Session variables
   home.sessionVariables = {
     EDITOR = "nvim";
     SHELL = "zsh";
-    NIXOS_OZONE_WL = "1";
   };
 
   nixpkgs.config = {
@@ -54,34 +38,18 @@
     # kitty
     # firefox
     mpv
-    grim
-    slurp
-    wlsunset
-    newsraft
-    ghostty
-    wlr-randr
-    wmenu
-    foot
-    qutebrowser
     ffmpeg
-    android-tools
-    wbg
     emacs
     ripgrep
     fd
     lsd
-    brightnessctl
     neomutt
 
     nerd-fonts.fira-mono
 
-    wl-clipboard
-
     tmux
     fzf
     zsh
-    pavucontrol
-    wofi
     alejandra
     rustup
     zig
@@ -89,14 +57,10 @@
     tmuxPlugins.vim-tmux-navigator
     tmuxPlugins.onedark-theme
     nodePackages.tailwindcss
-    qbittorrent
     go
     go-blueprint
-    gccgo14
     dprint
     delve
-    ldtk
-    libresprite
     btop
     leetgo
     gnumake
@@ -109,39 +73,54 @@
     zola
     unzip
     hugo
-    sshfs
     tree-sitter
     p7zip
     rar
     nodePackages.localtunnel
     typst
     openssl
-    psmisc
     air
     w3m
     gopass
     pinentry-curses
     gnupg
     dig
-    zathura
-    librewolf
 
-    heroic
     # solana-cli
     nodejs
     anchor
     yarn
-    discord
     cloudflared
-    monero-cli
-    signal-desktop
     wireguard-tools
     pkg-config
 
-    thunderbird-latest-unwrapped
-    tigervnc
     claude-code
-    alvr
+
+    # CLI tools (moved from homebrew)
+    gh
+    jq
+    htop
+    aria2
+    just
+    zoxide
+    socat
+    imagemagick
+    coreutils
+    actionlint
+    pnpm
+    deno
+    unar
+    nmap
+    helix
+    cargo-c
+    fastfetch
+    qmk
+    gcc-arm-embedded
+    avrdude
+    dfu-programmer
+    dfu-util
+    dos2unix
+    uv
   ];
 
   # Enable home-manager
