@@ -9,3 +9,7 @@ xmr
 xmr.keys
 monero-wallet-cli.log
 *.keys
+
+# Local config
+.mcp.json
+docs/
