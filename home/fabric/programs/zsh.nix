@@ -18,6 +18,7 @@
       };
       initContent = ''
 
+        export PATH="$HOME/.npm-global/bin:$PATH"
         export PATH="$HOME/.deno/bin:$PATH"
         export PATH="$HOME/.local/bin:$HOME/.local/lib/bin:$PATH"
         export PATH=$PATH:(go env GOPATH)/bin
