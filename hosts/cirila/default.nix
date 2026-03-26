@@ -129,6 +129,7 @@
       "nikitabobko/tap/aerospace"
       "audacity"
       "balenaetcher"
+      "chromium"
       "cyberduck"
       "deskflow"
       "ghostty"
