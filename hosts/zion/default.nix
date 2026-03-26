@@ -74,6 +74,9 @@
   # Display manager configuration
   services.displayManager.defaultSession = "plasma";
 
+  # Enable NVIDIA Container Toolkit for GPU passthrough
+  hardware.nvidia-container-toolkit.enable = true;
+
   # Basic system packages
   environment.systemPackages = with pkgs; [
     libinput
