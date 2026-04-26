@@ -11,6 +11,7 @@
         name = "FabricSoul";
         email = "fabric.soul7@gmail.com";
       };
+      credential.helper = "${pkgs.gh}/bin/gh auth git-credential";
     };
   };
 }

@@ -56,7 +56,6 @@
     tmuxPlugins.sensible
     tmuxPlugins.vim-tmux-navigator
     tmuxPlugins.onedark-theme
-    nodePackages.tailwindcss
     go
     go-blueprint
     dprint
@@ -76,7 +75,6 @@
     tree-sitter
     p7zip
     rar
-    nodePackages.localtunnel
     typst
     openssl
     air

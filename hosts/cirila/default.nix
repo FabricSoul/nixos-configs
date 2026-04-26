@@ -70,13 +70,13 @@
   system.defaults.CustomUserPreferences."com.apple.symbolichotkeys" = {
     AppleSymbolicHotKeys = {
       # 64 = Spotlight search, 65 = Finder search — disabled
-      "64" = { enabled = false; };
-      "65" = { enabled = false; };
+      "64" = {enabled = false;};
+      "65" = {enabled = false;};
       # 60 = Select previous input source → Cmd+Space
       "60" = {
         enabled = true;
         value = {
-          parameters = [ 32 49 1048576 ];
+          parameters = [32 49 1048576];
           type = "standard";
         };
       };
@@ -123,6 +123,7 @@
       "nikitabobko/tap"
     ];
     brews = [
+      "rtk"
       "ghidra"
     ];
     casks = [
@@ -152,6 +153,8 @@
       "xquartz"
       "zed"
       "zen"
+      "codex"
+      "blender"
     ];
     masApps = {
       "WeChat" = 836500024;
