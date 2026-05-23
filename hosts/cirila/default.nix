@@ -16,7 +16,8 @@
   # Default shell
   programs.zsh.enable = true;
 
-  # User
+  # User — login shell 保持 zsh（系统层不动）
+  # nushell 在 home-manager 层 + ghostty/tmux command 已设
   system.primaryUser = "fabric";
   users.users.fabric = {
     home = "/Users/fabric";

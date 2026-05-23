@@ -12,7 +12,8 @@
     # ./programs/kitty.nix
     ./programs/nixvim.nix
     ./programs/tmux.nix
-    ./programs/zsh.nix
+    ./programs/zsh.nix         # 保留 zsh 作为 fallback (login 默认仍是 zsh)
+    ./programs/nushell.nix     # nushell 作为 interactive 主力
     ./programs/ssh.nix
     ./programs/yazi.nix
   ];

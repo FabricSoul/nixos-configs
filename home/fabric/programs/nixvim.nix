@@ -41,9 +41,9 @@
       };
     };
     plugins = {
-      hardtime.enable = true;
+      hardtime.enable = false;
       avante = {
-        enable = true;
+        enable = false;
         settings = {
           diff = {
             autojump = true;
@@ -95,7 +95,6 @@
         enable = true;
       };
       cmp-dictionary.enable = true;
-      cmp-spell.enable = true;
       toggleterm = {
         enable = true;
         settings = {
@@ -335,6 +334,7 @@
           eslint.enable = true;
           templ.enable = true;
           htmx.enable = true;
+          ols.enable = true;
           nil_ls = {
             enable = true;
           };

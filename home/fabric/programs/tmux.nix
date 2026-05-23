@@ -19,6 +19,10 @@
 
       set -g allow-passthrough on
 
+      # Use nushell as default shell (avoid zsh compinit hangs)
+      set -g default-shell ${pkgs.nushell}/bin/nu
+      set -g default-command ${pkgs.nushell}/bin/nu
+
 
       # Vi copy mode bindings
       bind-key -T copy-mode-vi v send-keys -X begin-selection

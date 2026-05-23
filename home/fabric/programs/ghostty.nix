@@ -1,8 +1,11 @@
 # home/fabric/programs/ghostty.nix — Ghostty terminal config (darwin)
 # After OS-level Ctrl↔Cmd swap, physical Ctrl sends Cmd to the OS.
 # Remap all cmd+letter → ctrl characters so terminal Ctrl shortcuts work.
-{...}: {
+{pkgs, ...}: {
   home.file.".config/ghostty/config".text = ''
+    # Use nushell as default interactive shell (skip zsh compinit hellscape)
+    command = ${pkgs.nushell}/bin/nu
+
     # Hide titlebar (disables drag area, use aerospace to move windows)
     macos-titlebar-style = hidden
 
