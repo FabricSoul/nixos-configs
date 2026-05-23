@@ -13,3 +13,9 @@ monero-wallet-cli.log
 # Local config
 .mcp.json
 docs/
+
+# macOS junk
+.DS_Store
+
+# Playwright test artifacts
+test-results/
