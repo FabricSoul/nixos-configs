@@ -1,7 +1,10 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   services.xserver = {
     displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = false; # Use X11 for GNOME
     desktopManager.gnome.enable = true;
   };
 
