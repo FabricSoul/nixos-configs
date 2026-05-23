@@ -23,6 +23,12 @@
         reverse_proxy http://localhost:32400
       }
 
+      redir /grafana /grafana/ 308
+
+      handle_path /grafana/* {
+        reverse_proxy http://localhost:9000
+      }
+
       tls internal
     '';
   };

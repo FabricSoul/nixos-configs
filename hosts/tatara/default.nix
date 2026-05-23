@@ -18,6 +18,8 @@
     ../common/optional/plex.nix
     ../common/optional/qbit.nix
     ../common/optional/caddy.nix
+
+    # ../common/optional/postgres.nix
   ];
 
   # Bootloader
