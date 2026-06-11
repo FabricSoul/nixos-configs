@@ -17,7 +17,7 @@
     nixvim = {
       url = "github:nix-community/nixvim/main";
       # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
-      inputs.nixpkgs.follows = "nixpkgs";
+      # Note: do NOT follow nixpkgs — nixvim pins a specific nixpkgs and overriding it breaks plugin builds.
     };
     openapi-tui = {
       url = "github:zaghaghi/openapi-tui";

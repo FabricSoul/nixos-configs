@@ -27,15 +27,20 @@
       # Vi copy mode bindings
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       if-shell "uname | grep -q Darwin" \
-        "bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'pbcopy'" \
-        "bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy'"
+        "bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear 'pbcopy'" \
+        "bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear 'wl-copy'"
       bind-key P paste-buffer
       if-shell "uname | grep -q Darwin" \
-        "bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'pbcopy'" \
-        "bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'wl-copy'"
-      # Mouse scroll one line at a time
-      bind-key -T copy-mode-vi WheelUpPane send-keys -X scroll-up
-      bind-key -T copy-mode-vi WheelDownPane send-keys -X scroll-down
+        "bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear 'pbcopy'" \
+        "bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear 'wl-copy'"
+      # Mouse wheel scrolls half a page at a time
+      bind-key -T copy-mode-vi WheelUpPane send-keys -X halfpage-up
+      bind-key -T copy-mode-vi WheelDownPane send-keys -X halfpage-down
+      # Enter copy mode and half-page scroll when wheeling up in a normal pane
+      bind-key -T root WheelUpPane if-shell -F -t = "#{?pane_in_mode,1,#{mouse_any_flag}}" \
+        "send-keys -M" "if-shell -F -t = '#{alternate_on}' 'send-keys -M' 'copy-mode -e; send-keys -X halfpage-up'"
+      bind-key -T root WheelDownPane if-shell -F -t = "#{?pane_in_mode,1,#{mouse_any_flag}}" \
+        "send-keys -M" "send-keys -M"
 
       set-option -g status-position top
 

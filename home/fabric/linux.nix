@@ -18,6 +18,7 @@
   services.ssh-agent.enable = true;
 
   home.packages = with pkgs; [
+    starsector
     grim
     slurp
     wlsunset

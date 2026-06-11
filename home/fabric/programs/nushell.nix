@@ -10,6 +10,9 @@
         # PATH: 先 nix-managed paths（home-manager + nix-darwin + nix-profile）
         # 再 user paths（npm/deno/local/go），最后系统 paths
         $env.PATH = ([
+          # NixOS setuid wrappers (MUST be first — sudo/mount/etc live here)
+          "/run/wrappers/bin"
+
           # User paths (highest priority)
           $"($env.HOME)/.npm-global/bin"
           $"($env.HOME)/.deno/bin"
