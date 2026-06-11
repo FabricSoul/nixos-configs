@@ -88,7 +88,16 @@
           };
         };
       };
-      nvim-ufo.enable = true;
+      nvim-ufo = {
+        enable = true;
+        # Prefer treesitter folds (reliable across your langs incl. Odin),
+        # fall back to indent. LSP folding capability is set up by default.
+        settings.provider_selector = ''
+          function(bufnr, filetype, buftype)
+            return { "treesitter", "indent" }
+          end
+        '';
+      };
       render-markdown.enable = true;
       nui.enable = true;
       auto-session = {
@@ -130,9 +139,17 @@
           };
         };
         enable = true;
+        # Native C fuzzy sorter — fast, proper fzf-syntax matching (', ^, $, |).
+        extensions.fzf-native.enable = true;
         keymaps = {
           "<leader> " = {
             action = "find_files";
+          };
+          "<leader>b" = {
+            action = "buffers";
+          };
+          "<leader>o" = {
+            action = "oldfiles";
           };
           "<leader>tl" = {
             action = "live_grep";
@@ -194,6 +211,12 @@
           ensure_installed = [
             "bash"
             "c"
+            "cpp"
+            "odin"
+            "go"
+            "gomod"
+            "rust"
+            "zig"
             "diff"
             "html"
             "javascript"
@@ -223,10 +246,19 @@
         enable = true;
       };
       indent-blankline.enable = true;
+      # Jump anywhere on screen: `s` + 2 chars, then a label. Treesitter mode too.
+      flash.enable = true;
       harpoon = {
         enable = true;
       };
-      yazi.enable = true;
+      # Filesystem-as-a-buffer explorer. Edit dirs like text; `-` opens parent.
+      oil = {
+        enable = true;
+        settings = {
+          default_file_explorer = true;
+          view_options.show_hidden = true;
+        };
+      };
       gitsigns = {
         enable = true;
         settings = {
@@ -315,7 +347,14 @@
         };
       };
       todo-comments.enable = true;
-      persistence.enable = true;
+      trouble = {
+        enable = true;
+        # settings -> require('trouble').setup(); defaults are good.
+        # Diagnostics list / cascade view. Keymaps below (<leader>x*).
+      };
+      # Disabled: you already run auto-session; two session managers fight over
+      # save/restore. Re-enable this and drop auto-session if you prefer folke's.
+      persistence.enable = false;
       friendly-snippets.enable = true;
       lsp = {
         enable = true;
@@ -326,6 +365,8 @@
           gd = "definition";
           gi = "implementation";
           gt = "type_definition";
+          "<leader>rn" = "rename";
+          "<leader>ca" = "code_action";
         };
 
         servers = {
@@ -334,7 +375,10 @@
           eslint.enable = true;
           templ.enable = true;
           htmx.enable = true;
-          ols.enable = true;
+          ols = {
+            enable = true;
+
+          };
           nil_ls = {
             enable = true;
           };
@@ -412,7 +456,7 @@
             '';
           };
           preselect = "cmp.PreselectMode.Item";
-          complition.completeopt = "menu,menuone";
+          completion.completeopt = "menu,menuone";
         };
       };
       tmux-navigator.enable = true;
@@ -479,76 +523,120 @@
       termguicolors = true;
       signcolumn = "yes";
       scrolloff = 12;
+      # nvim-ufo requires these or folds misbehave (collapse on open, no preview).
+      # foldlevel/start=99 => open everything by default; ufo manages folding.
+      foldcolumn = "1";
+      foldlevel = 99;
+      foldlevelstart = 99;
+      foldenable = true;
       shada = "'1000,f1,<500,%";
       guicursor = "";
       colorcolumn = "80";
+      autowriteall = true;
+      winbar = "%=%m %f";
     };
+    autoCmd = [
+      {
+        event = ["BufLeave" "FocusLost" "InsertLeave" "TextChanged"];
+        pattern = ["*"];
+        callback.__raw = ''
+          function()
+            if vim.bo.modified
+              and not vim.bo.readonly
+              and vim.bo.buftype == ""
+              and vim.fn.expand("%") ~= ""
+              and vim.bo.modifiable then
+              vim.cmd("silent! write")
+            end
+          end
+        '';
+      }
+    ];
     keymaps = [
+      # flash.nvim — the module only runs setup(), so the jump keys must be
+      # bound here. (f/F/t/T are auto-enhanced; s/S are not.)
+      {
+        mode = ["n" "x" "o"];
+        key = "s";
+        action.__raw = "function() require('flash').jump() end";
+        options.desc = "Flash jump";
+      }
+      {
+        mode = ["n" "x" "o"];
+        key = "S";
+        action.__raw = "function() require('flash').treesitter() end";
+        options.desc = "Flash Treesitter";
+      }
+      {
+        mode = ["o"];
+        key = "r";
+        action.__raw = "function() require('flash').remote() end";
+        options.desc = "Remote Flash";
+      }
+      {
+        mode = ["o" "x"];
+        key = "R";
+        action.__raw = "function() require('flash').treesitter_search() end";
+        options.desc = "Flash Treesitter Search";
+      }
+      {
+        mode = ["c"];
+        key = "<C-s>";
+        action.__raw = "function() require('flash').toggle() end";
+        options.desc = "Toggle Flash while searching";
+      }
+      # Harpoon — leader-based to fit the Dvorak / home-row-mod board.
+      # `<M-number>` was a 3-hold (Alt-pinky + number-layer + digit); these are
+      # just thumb-space then a key. Only the 3 slots you actually use.
       {
         mode = "n";
-        key = "<M-m>";
+        key = "<leader>a";
         action.__raw = "function() require'harpoon':list():add() end";
         options.desc = "Harpoon add file";
       }
       {
         mode = "n";
-        key = "<M-i>";
+        key = "<leader>h";
         action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
-        options.desc = "Harpoon quick menu";
+        options.desc = "Harpoon menu";
       }
       {
         mode = "n";
-        key = "<M-1>";
+        key = "<leader>1";
         action.__raw = "function() require'harpoon':list():select(1) end";
         options.desc = "Harpoon file 1";
       }
       {
         mode = "n";
-        key = "<M-2>";
+        key = "<leader>2";
         action.__raw = "function() require'harpoon':list():select(2) end";
         options.desc = "Harpoon file 2";
       }
       {
         mode = "n";
-        key = "<M-3>";
+        key = "<leader>3";
         action.__raw = "function() require'harpoon':list():select(3) end";
         options.desc = "Harpoon file 3";
       }
+      # Buffers / quit. ZZ only closes the current window — these actually quit
+      # Neovim and manage buffers without touching Alt/Ctrl/number layers.
       {
         mode = "n";
-        key = "<M-4>";
-        action.__raw = "function() require'harpoon':list():select(4) end";
-        options.desc = "Harpoon file 4";
+        key = "<leader>q";
+        action = "<cmd>qa<cr>";
+        options.desc = "Quit all";
       }
       {
         mode = "n";
-        key = "<M-5>";
-        action.__raw = "function() require'harpoon':list():select(5) end";
-        options.desc = "Harpoon file 5";
+        key = "<leader>Q";
+        action = "<cmd>qa!<cr>";
+        options.desc = "Quit all (force, discard)";
       }
       {
         mode = "n";
-        key = "<M-6>";
-        action.__raw = "function() require'harpoon':list():select(6) end";
-        options.desc = "Harpoon file 6";
-      }
-      {
-        mode = "n";
-        key = "<M-7>";
-        action.__raw = "function() require'harpoon':list():select(7) end";
-        options.desc = "Harpoon file 7";
-      }
-      {
-        mode = "n";
-        key = "<M-8>";
-        action.__raw = "function() require'harpoon':list():select(8) end";
-        options.desc = "Harpoon file 8";
-      }
-      {
-        mode = "n";
-        key = "<M-9>";
-        action.__raw = "function() require'harpoon':list():select(9) end";
-        options.desc = "Harpoon file 9";
+        key = "<leader>d";
+        action.__raw = "function() require('snacks').bufdelete() end";
+        options.desc = "Close buffer (keep layout)";
       }
       {
         mode = "n";
@@ -640,7 +728,14 @@
       {
         mode = "n";
         key = "<leader>e";
-        action = ":Yazi<CR>";
+        action = "<cmd>Oil<cr>";
+        options.desc = "Open Oil file explorer";
+      }
+      {
+        mode = "n";
+        key = "-";
+        action = "<cmd>Oil<cr>";
+        options.desc = "Open parent dir (Oil)";
       }
       {
         mode = "n";
@@ -661,6 +756,38 @@
         action = "<cmd>LspStop<CR>";
         key = "<leader>ls";
         mode = ["n"];
+      }
+      # Trouble — diagnostics list / "where are my problems" panel
+      {
+        action = "<cmd>Trouble diagnostics toggle<cr>";
+        key = "<leader>xx";
+        mode = ["n"];
+        options.desc = "Diagnostics (Trouble) — all";
+      }
+      {
+        action = "<cmd>Trouble diagnostics toggle filter.buf=0<cr>";
+        key = "<leader>xX";
+        mode = ["n"];
+        options.desc = "Diagnostics (Trouble) — current buffer";
+      }
+      # nvim-ufo fold controls — use ufo's API so its fold preview stays in sync.
+      {
+        mode = "n";
+        key = "zR";
+        action.__raw = "function() require('ufo').openAllFolds() end";
+        options.desc = "Open all folds (ufo)";
+      }
+      {
+        mode = "n";
+        key = "zM";
+        action.__raw = "function() require('ufo').closeAllFolds() end";
+        options.desc = "Close all folds (ufo)";
+      }
+      {
+        mode = "n";
+        key = "zK";
+        action.__raw = "function() require('ufo').peekFoldedLinesUnderCursor() end";
+        options.desc = "Peek folded lines (ufo)";
       }
     ];
     colorschemes.rose-pine.enable = true;
