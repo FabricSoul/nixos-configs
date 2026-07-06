@@ -122,6 +122,10 @@
     dfu-util
     dos2unix
     uv
+    blender
+    gamescope
+    mangohud
+    ghidra
   ];
 
   # Enable home-manager
