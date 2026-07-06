@@ -9,9 +9,9 @@
 
     includes = ["~/.ssh/config.d/*"];
 
-    matchBlocks = {
+    settings = {
       "*" = {
-        addKeysToAgent = "yes";
+        AddKeysToAgent = "yes";
       };
     };
   };
