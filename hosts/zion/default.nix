@@ -18,10 +18,10 @@
     # ../common/optional/flatpak.nix
     ../common/optional/fcitx5.nix
     ../common/optional/bluetooth.nix
-    ../common/optional/sunshine.nix
+    # ../common/optional/sunshine.nix
 
-    ../common/optional/qemu.nix
-    ../common/optional/gnome.nix
+    # ../common/optional/qemu.nix
+    # ../common/optional/gnome.nix
   ];
 
   # Bootloader
@@ -75,14 +75,14 @@
   services.displayManager.defaultSession = "plasma";
 
   # Enable NVIDIA Container Toolkit for GPU passthrough
-  hardware.nvidia-container-toolkit.enable = true;
+  # hardware.nvidia-container-toolkit.enable = true;
 
   # Basic system packages
   environment.systemPackages = with pkgs; [
     libinput
     libnotify
     kitty
-    ollama-cuda
+    # ollama-cuda
     usbutils
     obs-studio
     ntfs3g
