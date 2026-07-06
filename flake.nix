@@ -31,6 +31,11 @@
       url = "github:grantimatter/eden-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    claude-code = {
+      # Faster-updating Claude Code CLI than nixpkgs, with bundled Node.js.
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -42,6 +47,7 @@
     openapi-tui,
     fabric-dwl,
     eden,
+    claude-code,
     ...
   }: let
     lib = nixpkgs.lib;
@@ -73,7 +79,7 @@
     homeConfigurations.fabric = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       extraSpecialArgs = {
-        inherit nixvim openapi-tui eden;
+        inherit nixvim openapi-tui eden claude-code;
       };
       modules = [
         ./home/fabric/default.nix
