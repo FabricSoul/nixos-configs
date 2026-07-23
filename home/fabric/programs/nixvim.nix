@@ -374,7 +374,8 @@
           ts_ls.enable = true;
           eslint.enable = true;
           templ.enable = true;
-          htmx.enable = true;
+          # Disabled: htmx LSP spams "INVALID_SERVER_MESSAGE" errors.
+          htmx.enable = false;
           ols = {
             enable = true;
 
@@ -548,6 +549,29 @@
               and vim.bo.modifiable then
               vim.cmd("silent! write")
             end
+          end
+        '';
+      }
+      # Prose/doc editing: soft word-wrap like a word processor. Buffer-local so
+      # code buffers keep wrap=false (see opts). linebreak only affects display,
+      # it never inserts real newlines into the file.
+      {
+        event = ["FileType"];
+        pattern = ["markdown" "text" "gitcommit"];
+        callback.__raw = ''
+          function()
+            vim.opt_local.wrap = true          -- soft-wrap long lines
+            vim.opt_local.linebreak = true     -- break at word boundaries, not mid-word
+            vim.opt_local.breakindent = true   -- keep wrapped part aligned with the line
+            vim.opt_local.showbreak = "↳ "     -- marker on continued (wrapped) rows
+
+            -- Move by visual line, but keep counts working (you use
+            -- relativenumber, so 5j still jumps 5 real lines).
+            local o = { buffer = true, expr = true, silent = true }
+            vim.keymap.set({ "n", "x" }, "j", function() return vim.v.count == 0 and "gj" or "j" end, o)
+            vim.keymap.set({ "n", "x" }, "k", function() return vim.v.count == 0 and "gk" or "k" end, o)
+            vim.keymap.set({ "n", "x" }, "0", "g0", { buffer = true, silent = true })
+            vim.keymap.set({ "n", "x" }, "$", "g$", { buffer = true, silent = true })
           end
         '';
       }
